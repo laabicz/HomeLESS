@@ -1,0 +1,36 @@
+target name
+target type
+1 point dia
+2 point dia
+3 point dia
+4 point dia
+5 point dia
+6 point dia
+7 point dia
+8 point dia
+9 point dia
+10 point dia
+number of black diameter
+
+all target dimensions are in millimeters
+
+
+
+
+full circle
+every diameters are set
+
+
+
+half circle
+diameters started with other value then 1point diameter
+
+
+
+fragmented circle
+some diameters are missing
+
+
+
+small circle
+there is only one diameter for 10points, others diameters are zero.
