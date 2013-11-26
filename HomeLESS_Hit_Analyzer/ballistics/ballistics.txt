@@ -1,0 +1,43 @@
+ballistics
+
+number_weaponNameType.bal
+
+
+
+shooting range
+weapon type
+
+wind_power = 0 (zero for no wind)
+wind_angle = 0 (0-360)
+
+range (meters)
+shift (mm)
+
+
+for airgun
+1_AAS400_Hawke_16J.bal
+meters	mm
+range	shift (notation value + 500)
+0	
+5
+10
+15
+20
+25
+30
+35
+40
+45
+50
+55
+60
+65
+70
+75
+80
+85
+90
+95
+100
+etc.
+
