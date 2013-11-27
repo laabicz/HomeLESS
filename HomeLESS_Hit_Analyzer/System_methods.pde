@@ -710,6 +710,7 @@ void handle_txtShootlog_filename(GTextField textfield)
     {
     b_shortcuts = false;
     }
+  s_Shooter_name = txtShootlog_filename.getText();
 };
 
 

@@ -273,7 +273,7 @@ public void create_ShootLog_interface()
   txtShootLog.addEventHandler(this, "handle_txtShootLog");
   
   text(s_Shooter, x_position , y_position + 156, 120, 25);
-  txtShootlog_filename = new GTextField(this, "Anonymous", x_position +70 , y_position +155, 120, 25);
+  txtShootlog_filename = new GTextField(this, s_Shooter_name, x_position +70 , y_position +155, 120, 25);
   txtShootlog_filename.addEventHandler(this, "handle_txtShootlog_filename");
   
   btnExport = new GButton(this, s_Export , x_position + 200, y_position +155, 80, 25);
