@@ -16,18 +16,18 @@ along with <insert software name>.  If not, see <http://www.gnu.org/licenses/>.
 
 public String target_name, name_of_target_file;
 public int  i_target_type; //target_number,
-public int i_number_of_tgt_files = 0;
+public int i_number_of_tgt_files = 0, i_simulated_distance = 10, i_real_distance = 5;
 String[] s_targets_names;
 public boolean b_ha_ini_exist = false, b_english_lng_exist = false;
 //dafaluts strings
-String[] s_default_ha_ini = {"Webcam = 0","Video width = 640","Video height = 480","Sensitivity = 3","Style = 1","SLH = 1","language = english","Caliber = 4.5","Delay = 3","Duration = 5","Target = airgun_cz.tgt","Scale = 1.00","X correction = 5000","Y correction = 5000", "Time = 120", "Prepare = 5", "Autoshootlog = 1", "Shooter = Mamlas"};
-String[] s_ha_ini_clear_contain  = {"Webcam = ","Video width = ","Video height = ","Sensitivity = ","Style = ","SLH = ","language = ","Caliber = ","Delay = ","Duration = ","Target = ","Scale = ","X correction = ","Y correction = ", "Time = ", "Prepare = ", "Autoshootlog = ", "Shooter = "};
-String[] s_ha_ini_contain  = {"Webcam = ","Video width = ","Video height = ","Sensitivity = ","Style = ","SLH = ","language = ","Caliber = ","Delay = ","Duration = ","Target = ","Scale = ","X correction = ","Y correction = ", "Time = ", "Prepare = ", "Autoshootlog = ", "Shooter = " };
+String[] s_default_ha_ini = {"Webcam = 0","Video width = 640","Video height = 480","Sensitivity = 3","Style = 1","SLH = 1","language = english","Caliber = 4.5","Delay = 3","Duration = 5","Target = airgun_cz.tgt","Scale = 1.00","X correction = 5000","Y correction = 5000", "Time = 120", "Prepare = 5", "Autoshootlog = 1", "Shooter = Mamlas", "Simulated distance = 10", "Real distance = 5"};
+String[] s_ha_ini_clear_contain  = {"Webcam = ","Video width = ","Video height = ","Sensitivity = ","Style = ","SLH = ","language = ","Caliber = ","Delay = ","Duration = ","Target = ","Scale = ","X correction = ","Y correction = ", "Time = ", "Prepare = ", "Autoshootlog = ", "Shooter = ", "Simulated distance = ", "Real distance = "};
+String[] s_ha_ini_contain  = {"Webcam = ","Video width = ","Video height = ","Sensitivity = ","Style = ","SLH = ","language = ","Caliber = ","Delay = ","Duration = ","Target = ","Scale = ","X correction = ","Y correction = ", "Time = ", "Prepare = ", "Autoshootlog = ", "Shooter = " , "Simulated distance = ", "Real distance = "};
 String[] s_shoot_logs = new String[145];
 //String[] s_ha_ini_contain = new String[14];
-String[] s_default_english_lng = {"Shooter:","Correction:","Caliber:","Infobox:","Duration:","Targets list","New shoot","Select target:","Sound","SLH","Let's fire","Time:","Reset","Export","Points:","Hits:","Total:","Target:","HomeLESS - Hit Analyzer version 1.1b","Found target files:","Save changes", "Shooting style:", "Training", "Sport", "Combat", "Hunting", "Sensitivity: ", "Conditions: "};
+String[] s_default_english_lng = {"Shooter:","Correction:","Caliber:","Infobox:","Duration:","Targets list","New shoot","Select target:","Sound","SLH","Let's fire","Time:","Reset","Export","Points:","Hits:","Total:","Target:","HomeLESS - Hit Analyzer version 1.1b","Found target files:","Save changes", "Shooting style:", "Training", "Sport", "Combat", "Hunting", "Sensitivity: ", "Conditions: ", "Simulated distance: "};
 String s_language_file, s_current_language, s_shoot_log_contain ,s_shootlog_full_filename, s_Shootlog_filename;
-String s_selected_target_name, s_Sensitivity, s_Conditions, s_Shooter_name;
+String s_selected_target_name, s_Sensitivity, s_Conditions, s_Shooter_name, s_Distance;
 
 public void check_basic_files()
 {
@@ -172,6 +172,11 @@ public void load_ha_ini()
     }
   
   s_Shooter_name = contain[17].substring(10);
+  
+  i_simulated_distance = Integer.valueOf(contain[18].substring(21)).intValue();
+  i_real_distance = Integer.valueOf(contain[19].substring(16)).intValue();
+  
+  System.out.println("Real distance: " + i_real_distance);
   System.out.println("Basic file ha.ini file loaded. \n");
 };
 
@@ -398,6 +403,8 @@ public void save_file_ha_ini()
   s_ha_ini_contain[15] = "Prepare = ";
   s_ha_ini_contain[16] = "Autoshootlog = ";
   s_ha_ini_contain[17] = "Shooter = ";
+  s_ha_ini_contain[18] = "Simulated distance = ";
+  s_ha_ini_contain[19] = "Real Distance = ";
 
   //s_ha_ini_contain = s_ha_ini_clear_contain;
     
@@ -438,6 +445,8 @@ public void save_file_ha_ini()
   s_ha_ini_contain[15] += i_shooting_prepare;
   s_ha_ini_contain[16] += byte_autoshootlog;
   s_ha_ini_contain[17] += s_Shooter_name;
+  s_ha_ini_contain[18] += i_simulated_distance;
+  s_ha_ini_contain[18] += i_real_distance;
   
   saveStrings("ha.ini", s_ha_ini_contain);
   System.out.println("Changes in configuration has been saved into ha.ini file.");
@@ -520,8 +529,8 @@ public void export_file_shoot_log()
   s_shoot_logs[7] += " mm"; //metric units
   
   s_shoot_logs[8] = "Target name: " + target_name;
-  s_shoot_logs[9] = "Shooting distance: 10 meters";
-  s_shoot_logs[10] = "Real distance: 5 meters ";
+  s_shoot_logs[9] = "Simulated distance: " + String.valueOf(i_simulated_distance) + " meters"; 
+  s_shoot_logs[10] = "Real distance: " + String.valueOf(i_real_distance) + " meters ";
   s_shoot_logs[11] = "Style: " + s_current_shooting_style;
   s_shoot_logs[12] = "";
   s_shoot_logs[13] = "";
