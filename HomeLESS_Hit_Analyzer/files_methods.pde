@@ -25,7 +25,7 @@ String[] s_ha_ini_clear_contain  = {"Webcam = ","Video width = ","Video height =
 String[] s_ha_ini_contain  = {"Webcam = ","Video width = ","Video height = ","Sensitivity = ","Style = ","SLH = ","language = ","Caliber = ","Delay = ","Duration = ","Target = ","Scale = ","X correction = ","Y correction = ", "Time = ", "Prepare = ", "Autoshootlog = ", "Shooter = " , "Simulated distance = ", "Real distance = "};
 String[] s_shoot_logs = new String[145];
 //String[] s_ha_ini_contain = new String[14];
-String[] s_default_english_lng = {"Shooter:","Correction:","Caliber:","Infobox:","Duration:","Targets list","New shoot","Select target:","Sound","SLH","Let's fire","Time:","Reset","Export","Points:","Hits:","Total:","Target:","HomeLESS - Hit Analyzer version 1.1b","Found target files:","Save changes", "Shooting style:", "Training", "Sport", "Combat", "Hunting", "Sensitivity: ", "Conditions: ", "Simulated distance: "};
+String[] s_default_english_lng = {"Shooter:","Correction:","Caliber:","Infobox:","Duration:","Targets list","New shoot","Select target:","Sound","SLH","Let's fire","Time:","Reset","Export","Points:","Hits:","Total:","Target:","HomeLESS - Hit Analyzer version 1.1b","Found target files:","Save changes", "Shooting style:", "Training", "Sport", "Combat", "Hunting", "Sensitivity: ", "Conditions: ", "Distance: "};
 String s_language_file, s_current_language, s_shoot_log_contain ,s_shootlog_full_filename, s_Shootlog_filename;
 String s_selected_target_name, s_Sensitivity, s_Conditions, s_Shooter_name, s_Distance;
 
@@ -218,6 +218,7 @@ public void load_lang_pack()
   s_Hunting = contain[25];
   s_Sensitivity = contain[26];
   s_Conditions = contain[27];
+  s_Distance = contain[28];
   System.out.println("Basic file lang pack loaded. \n");
 };
 
@@ -249,8 +250,8 @@ public void load_target_list_combo()
   
   for (int j = 1 ; j <= i_number_of_tgt_files; j++)
   {
-    System.out.println("target number " + j);
-    System.out.println(s_target_file_names[j]); 
+    //System.out.println("target number " + j);
+    //System.out.println(s_target_file_names[j]); 
     s_targets_names[j] = s_target_file_names[j]; 
   }
 };
@@ -446,7 +447,7 @@ public void save_file_ha_ini()
   s_ha_ini_contain[16] += byte_autoshootlog;
   s_ha_ini_contain[17] += s_Shooter_name;
   s_ha_ini_contain[18] += i_simulated_distance;
-  s_ha_ini_contain[18] += i_real_distance;
+  s_ha_ini_contain[19] += i_real_distance;
   
   saveStrings("ha.ini", s_ha_ini_contain);
   System.out.println("Changes in configuration has been saved into ha.ini file.");

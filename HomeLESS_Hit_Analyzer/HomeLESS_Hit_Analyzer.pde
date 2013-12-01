@@ -8,7 +8,7 @@ laabicz@gmail.com
 
 www.homeless-eng.webnode.com
 
-last rev. 28.11.2013  (dd.mm.yyyy)
+last rev. 01.12.2013  (dd.mm.yyyy)
 ******************************************
 
 This HomeLESS_Hit_Analyzer.pde is part of HomeLESS Hit Analyzer.
@@ -31,6 +31,7 @@ import codeanticode.gsvideo.*;
 import guicomponents.*;
 import processing.opengl.*;
 import controlP5.*;
+//import g4p_controls.*;
 
 
 ControlP5 controlP5;
@@ -48,10 +49,13 @@ GButton btnSave, btnNewShot, btnResetValues, btnExport, btnReset, btnLetsFire, b
 GImageButton btnCorrection_down, btnCorrection_up, btnCorrection_left, btnCorrection_right , btnCorrection_reset, btnScale_reset; // correction buttons
 GImageButton btnScrollDown, btnScrollUp, btnMinus,btnPlus, btnSensitivity_up, btnSensitivity_down;
 GButton btnNextTarget, btnPreviousTarget ;
-GTextField txtCaliber, txtShootLog, txtDelay, txtShooting_Time , txtDuration, txtTarget_number, txtShootlog_filename;
+GTextField txtCaliber, txtShootLog, txtDelay, txtShooting_Time , txtDuration, txtTarget_number, txtShootlog_filename, txtDistance;
 GWindow[] windowTargetsList;
 GTimer tmrMilisTimer, tmrSecondsTimer_Shooting_Countdown, tmrSecondsTimer_Shooting_Prepare;
 GCombo cboTarget_selection;
+
+
+DropdownList DdL_Target_selection;
 
 
 
@@ -161,6 +165,7 @@ void draw()
   draw_stats();
   //combo clearing utility :)
   fill(backround_color);
-  rect(video_width + 160, 220, 151, 65);
+  rect(video_width + 210, 220, 100, 85);
+  
 };
 

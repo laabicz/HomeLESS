@@ -127,15 +127,66 @@ public void create_shooting_conditions()
   text(s_Duration, x_position, y_position + 60, 200, 30);
   txtDuration = new GTextField(this, String.valueOf(duration), x_position + 80, y_position + 60, 60, 20);
   txtDuration.addEventHandler(this, "handle_txtDuration");
-  
+  text(s_Distance, x_position, y_position + 90, 200, 30);
+  txtDistance = new GTextField(this, String.valueOf(i_simulated_distance), x_position + 80, y_position + 90, 60, 20);
+  txtDistance.addEventHandler(this, "handle_txtDistance");
 };
+
+
 
 public void create_target_selection_combo()
 {
+  
+  // cp5 control version
+  x_position = video_width + 210;
+  y_position = 220;
+  fill(0, 0, 0, 255);
+  textSize(16);
+  text(s_Target_select, x_position - 110 , y_position - 23 , 130, 30);
+  controlP5 = new ControlP5(this);
+
+  DdL_Target_selection = controlP5.addDropdownList(s_selected_target_name).setPosition(x_position, y_position);
+  customize(DdL_Target_selection);
+  
+  fill(0);
+  rect(x_position-1, y_position-22, 100, 21);
+};
+
+
+void customize(DropdownList ddl) {
+  // a convenience function to customize a DropdownList
+  ddl.setBackgroundColor(color(backround_color));
+  ddl.setItemHeight(20);
+  ddl.setBarHeight(20);
+  //ddl.captionLabel().set("dropdown");  // write here selected target
+  ddl.captionLabel().style().marginTop = 3;
+  ddl.captionLabel().style().marginLeft = 3;
+  ddl.valueLabel().style().marginTop = 3;
+  
+  for (int index = 1; index <= i_number_of_tgt_files ; index++)
+   {
+    ddl.addItem(s_targets_names[index], index);
+    System.out.println(s_targets_names[index]+ " number: " + index);
+   }
+  
+  ddl.setColorBackground(color(255));
+  ddl.setColorForeground(color(155, 228+20));
+  ddl.setColorActive(100);
+  ddl.setColorLabel(0);
+  
+
+
+}
+
+public void create_target_selection_combo2()
+{
+  /* old G4P version
+  
   x_position = video_width + 160;
   y_position = 200;
   fill(0, 0, 0, 255);
   textSize(16);
+  
   cboTarget_selection = new GCombo(this, s_targets_names, 3, x_position, y_position, 150);
   text(s_Target_select, x_position - 130 , y_position , 130, 30);
   
@@ -149,10 +200,15 @@ public void create_target_selection_combo()
       }  
   } 
   
-  
+  */
   //cboTarget_selection.setSelected(0);
   
 };
+
+
+
+
+
 
 
 public void create_button_save_changes()
@@ -186,10 +242,10 @@ public void create_shooting_style_option()
     text(s_Sport, x_position +20 , y_position + 25, 200, 30);
     optSport = new GOption(this, "",  x_position, y_position + 25, 120);
     //combat
-    text(s_Combat, x_position +125 , y_position, 200, 30);
+    text(s_Combat, x_position +118 , y_position, 200, 30);
     optCombat = new GOption(this, "", x_position + 100, y_position, 120);
     //hunting
-    text(s_Hunting, x_position +125 , y_position + 25, 200, 30);
+    text(s_Hunting, x_position +118 , y_position + 25, 200, 30);
     optHunting = new GOption(this, "", x_position + 100, y_position + 25, 120);
     optGroup_shooting_style.addOption(optTraining);
     optGroup_shooting_style.addOption(optSport);

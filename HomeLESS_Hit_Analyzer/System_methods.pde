@@ -694,7 +694,18 @@ void handle_txtDuration(GTextField textfield)
     }
 };
 
-
+void handle_txtDistance(GTextField textfield)
+{
+  if (textfield.eventType == GTextField.ENTERED)
+    {
+    i_simulated_distance = Integer.parseInt(txtDistance.getText());
+    System.out.println("i_simulated_distance: " + i_simulated_distance);
+    }
+  if(textfield.eventType == GTextField.CHANGED)
+    {
+    b_shortcuts = false;
+    }
+};
 
 void handle_txtShootLog(GTextField textfield)
 {
@@ -723,6 +734,32 @@ public void handleComboEvents(GCombo combo)
    load_target_file();
   }
 };
+
+
+void controlEvent(ControlEvent theEvent)
+{
+  // DropdownList is of type ControlGroup.
+  // A controlEvent will be triggered from inside the ControlGroup class.
+  // therefore you need to check the originator of the Event with
+  // if (theEvent.isGroup())
+  // to avoid an error message thrown by controlP5.
+
+  if (theEvent.isGroup())
+   {
+    // check if the Event was triggered from a ControlGroup
+    println("event from group : "+theEvent.getGroup().getValue()+" from "+theEvent.getGroup());
+    
+    println("Selected target : " + s_targets_names[ int(theEvent.getGroup().getValue())]);
+    s_selected_target_name = s_targets_names[ int(theEvent.getGroup().getValue())];
+    System.out.println(s_selected_target_name);
+    load_target_file();
+   } 
+  
+  else if (theEvent.isController())
+   {
+    println("event from controller : "+theEvent.getController().getValue()+" from "+theEvent.getController());
+   }
+}
 
 
 public void keyPressed()
