@@ -2,13 +2,13 @@
 ******************************************
 HomeLESS - Hit Analyzer
 Home Laser Shooting Simulator - Hit Analyzer
-version 1.1b
+version 1.2a
 by Laabicz
 laabicz@gmail.com
 
 www.homeless-eng.webnode.com
 
-last rev. 01.12.2013  (dd.mm.yyyy)
+last rev. 2014-10-01  (yyyy-mm-dd)
 ******************************************
 
 This HomeLESS_Hit_Analyzer.pde is part of HomeLESS Hit Analyzer.
@@ -23,85 +23,80 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with <insert software name>.  If not, see <http://www.gnu.org/licenses/>.
+along with HomeLESS Hit Analyzer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 
 import codeanticode.gsvideo.*;
-import guicomponents.*;
 import processing.opengl.*;
-import controlP5.*;
-//import g4p_controls.*;
-
-
-ControlP5 controlP5;
-MultiList l;
-
+import hypermedia.net.*;    // import UDP library
+import g4p_controls.*;
 
 GSCapture video;
 
 
 GCheckbox cbxSound, cbxShow_last_hit, cbxDiameter;
 
-GOptionGroup optGroup_shooting_style = new GOptionGroup();
-GOption optTraining, optSport, optCombat, optHunting;
-GButton btnSave, btnNewShot, btnResetValues, btnExport, btnReset, btnLetsFire, btnTargetsList; 
+GToggleGroup optGroup_shooting_style = new GToggleGroup(); //new
+//GOption optTraining, optSport, optCombat, optHunting;  //old
+GOption optTraining, optSport;  //new
+
 GImageButton btnCorrection_down, btnCorrection_up, btnCorrection_left, btnCorrection_right , btnCorrection_reset, btnScale_reset; // correction buttons
-GImageButton btnScrollDown, btnScrollUp, btnMinus,btnPlus, btnSensitivity_up, btnSensitivity_down;
+GImageButton btnLetsFire, btnReset, btnExport, btnGhost_corrections, btnGeneral_settings, btnWeapon_settings, btn_Win_target_settings;
+GImageButton btnHit_sight_offset_Y_up, btnHit_sight_offset_X_left, btnHit_sight_offset_Y_down, btnHit_sight_offset_X_right, btnHit_sight_offset_zero, btnSave_gun;
+GImageButton btnHit_sight_autocenter, btnScrollDown, btnScrollUp, btnSensitivity_up, btnSensitivity_down;
 GButton btnNextTarget, btnPreviousTarget ;
-GTextField txtCaliber, txtShootLog, txtDelay, txtShooting_Time , txtDuration, txtTarget_number, txtShootlog_filename, txtDistance;
-GWindow[] windowTargetsList;
+GTextField txtShootLog, txtDelay, txtTarget_number, txtShootlog_filename;
+
+//general config
+GWindow windowGeneral_settings;
+
+
+
+
+
 GTimer tmrMilisTimer, tmrSecondsTimer_Shooting_Countdown, tmrSecondsTimer_Shooting_Prepare;
-GCombo cboTarget_selection;
 
+//HIP config
+UDP udp;
 
-DropdownList DdL_Target_selection;
-
+GDropList dropList_weapon_selection;
 
 
 void setup()
 {
+  System.out.println("\nJava Runtime Enviroment is present.\n");
+  //println("\n\nStarting HomeLESS Hit Analyzer... \n\n"); add this mesage into startup script
+  //frameRate(30);
   check_basic_files();
   load_ha_ini();
+  HIP_setup();
+  generate_list_of_targets_files();
+  generate_list_of_gun_files();
+
   load_lang_pack();
   create_window();
-  load_ballistics_data();
-  //load_target_file();
   //set_selected_target_name(target_number);
   load_target_file();
-  
+  load_weapon_file();
 
-  //G4P.setMouseOverEnabled(true);
-  //G4P.cursor(CROSS);
-  G4P.setColorScheme(this, GCScheme.GREY_SCHEME);
-  G4P.setFont(this, "Verdana", 16);
-  
-  //Optionbutton
-  //draw_webcam_option();
-  //create_targets_list_button();
-  //create_target_select(); //button
-  create_correction_buttons();
-  create_sensitivity_buttons();
-  load_target_list_combo();  //for combo
-  create_target_selection_combo(); //combo
+  create_button_win_genereal_settings();
+  create_button_win_target_settings();
+  create_button_win_weapon_settings();
   //create_sound_option();
-  create_shooting_conditions();
-  create_shooting_style_option();
-  create_button_save_changes();
   create_button_Lets_Fire();
+  //create_button_Save_configuration();  //move into general and target settings
   create_button_Reset_Values();
   
   // Interfaces
-  create_ShootLog_interface();
+  //create_ShootLog_interface();
+  create_Export_interface();
  
   // About
   create_about_text();
   
   //NameOfTimer(this,this, called function, period of calling)
   create_timers();
-  
-  //testing
-  //createWindowTargetsList();
   
   camera_setup();
   video.start();
@@ -112,17 +107,17 @@ void setup()
     fill(255, 0, 0, 255);
     textSize(50);
     text("NO VIDEO DATA", x_position, y_position, 600, 300);
+    //println("\nError: Suitable webcam is not present.\n");
   };
   
-  noStroke();
+  noStroke();  //disable borders
   //smooth();
 };
 
+
 void draw()
 {
-  // To do when video running
-  //if (video.available() && (b_Configure || b_Shooting))
-  
+  system_clock_timer();
   
   if (video.available() && (b_Configure || (b_shoot_stop == false)))
   {
@@ -135,37 +130,35 @@ void draw()
     // Draw ghost image to calibrate 
     scale_the_target();
     draw_calibration_ghost_image();
-    draw_shooting_prepare_countdown();
+    
+    if(b_Configure == true)
+      {
+        draw_hold_last_hit(); //for sight adjustment 
+      };
+    
+    draw_shooting_prepare_countdown();  //timer needed
     draw_sensitivity();
     
     //*** Finding position of the hit ***
     find_position_of_hit();
-    //*** Hit analizing ***
+
+    //*** Hit analizying ***
     calculate_hit_range();
     //*** Draw a point into video ***
     draw_position_of_hit();
     hit_points_calculation();
-    stop_analyze_when_hit_detected();
+    stop_analyze_when_hit_detected(); //enable b_hit_detected
     stop_analyze_when_hitcount_overflow();
     write_to_shoot_log();
-    stop_by_style();
+    send_hit_position(); // only when hit detected 
+    b_Hit_detected = false;
+    //stop_by_style();
+    stop_by_limits();
   }
-  /*else
-  {
-    x_position = 100;
-    y_position = 240;
-    fill(backround_color);
-    rect(x_position, y_position, 400, 60);
-    fill(255, 0, 0, 255);
-    textSize(50);
-    text("NO VIDEO DATA", x_position, y_position, 600, 300);
-  };*/
   
   draw_time();
   draw_stats();
-  //combo clearing utility :)
-  fill(backround_color);
-  rect(video_width + 210, 220, 100, 85);
+  draw_conditions();
   
 };
 

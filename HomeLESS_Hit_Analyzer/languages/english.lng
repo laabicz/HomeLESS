@@ -1,28 +1,40 @@
-Shooter:
-Correction:
-Caliber:
-Infobox:
-Duration:
-Targets list
-New shoot
-Select target:
-Sound
-SLH
-Let's fire
-Time:
-Reset
-Export
-Points:
-Hits:
-Total:
-Target:
-HomeLESS - Hit Analyzer version 1.1b
-Found target files:
-Save changes
-Shooting style:
-Training
-Sport
-Combat
-Hunting
-Sensitivity: 
-Conditions: 
+HomeLESS - Hit Analyzer version 1.2a
+Target
+Time
+Points
+Hits
+Total
+Shooter
+Weapon
+Caliber
+Distance
+Rounds
+meters
+yards
+hits
+** General settings **
+Hits limit
+Time limit
+Countdown
+Autoshootlog
+Sensitivity
+Rear cam
+Show last hit
+** Target setttings **
+Target selection
+Correction
+Simulated distance
+Real distance
+Use metric system
+** Weapon settings **
+Profile
+Name
+Sight adjustment
+** Shootlog **
+Date
+Hour
+Average
+Target name
+Shootlog version: 2
+Target file
+Target type
