@@ -462,6 +462,11 @@ void write_to_shoot_log()
     //s_shoot_logs[shoot_log_counter - 1] = current_shoot_log;
     current_shoot_log = "";
     shoot_log_counter++;
+    if(b_monoscope_synchronization_enabled)
+    {
+      shoot_log_counter = 0;
+    }
+    
   };
   //b_Hit_detected = false;
   // Scroll down until last event is visible.
