@@ -51,17 +51,19 @@ void receive( byte[] data, String ip, int port )
         //String[] parts = split(message, "&");
         int sentX = int(parts[3]);
         int sentY = int(parts[4]);    //"24" -> 24
-        //println( "sentX: " +sentX);
-        //println( "sentY: " +sentY);
+        println( "sentX: " +sentX);
+        println( "sentY: " +sentY);
         
-        shoot_the_ball(sentX +i_area_of_interest_offset_X, sentY +i_area_of_interest_offset_Y);
-        
-        println( "i_ball_left: " + i_ball_left);
-        //reset the program
+         //reset the program
         if(i_ball_left == 0)
         {
-          shoot_the_reset(sentX +i_area_of_interest_offset_X, sentY +i_area_of_interest_offset_Y);
+          shoot_the_reset(sentX + i_area_of_interest_offset_X, sentY + i_area_of_interest_offset_Y);
         };
+        
+        shoot_the_ball(sentX + i_area_of_interest_offset_X, sentY + i_area_of_interest_offset_Y);
+        
+        println( "i_ball_left: " + i_ball_left);
+       
         
         //ellipse(sentX + i_area_of_interest_offset_X, sentY + i_area_of_interest_offset_Y, 5, 5);
         //stroke(0);   

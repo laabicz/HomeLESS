@@ -34,6 +34,7 @@ void bullet_reload()
     i_bullets_left_counter =  i_number_of_bullets;
     //i_time_of_penalty++;
     i_time_of_penalty += 2;
+    i_penalty_counter++;
     System.out.println("Penalty for reload, +2 second.");
 }
 

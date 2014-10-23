@@ -15,6 +15,8 @@ along with HomeLESS: The Bubbles.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 Ball[] myBall;
+
+//maximum allowed balls are 20;
 int i_number_of_balls = 10;
 int i_ball_left = i_number_of_balls;
 float i_ball_radius_big = 40;
@@ -26,7 +28,7 @@ int i_ball_dameter;
 int i_ball_dameter_small;
 boolean b_all_balls_hit = false;
 
-float f_ball_velocity_min = 5, f_ball_velocity_max = 5;
+float f_ball_velocity_min = 1, f_ball_velocity_max = 1;  //1-4
 
 
 
@@ -63,6 +65,7 @@ class Ball
   boolean b_vector_orientation_X = false; // false, negative vector -> vector < 0
   boolean b_vector_orientation_Y = false; 
   private color c1, c2, c3;
+  private int i_color_big = 100, i_color_middle = 50, i_color_center = 0;
   private int i_ball_id;
   boolean hit;
   Ball[] others_balls;
@@ -224,11 +227,17 @@ class Ball
   {
     if(!hit)
     {
-      fill(c3, 110);
+
+      //big
+      fill(0);
       ellipse(f_ball_position_X, f_ball_position_Y, i_ball_diameter_big, i_ball_diameter_big);
-      fill(c2, 100);
+      
+      //middle
+      fill(255);
       ellipse(f_ball_position_X, f_ball_position_Y, i_ball_radius_middle * 2, i_ball_radius_middle * 2);
-      fill(c1, 120);
+      
+      //center
+      fill(0);
       ellipse(f_ball_position_X, f_ball_position_Y, i_ball_radius_center * 2, i_ball_radius_center * 2);
     }
     /*

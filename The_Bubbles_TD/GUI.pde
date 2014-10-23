@@ -15,6 +15,12 @@ along with HomeLESS: The Bubbles.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 
+//int i_area_of_interest_background = 200;
+int i_area_of_interest_background = 255;
+int i_area_of_interest_offset_X = 20;
+int i_area_of_interest_offset_Y = 20;
+int x_position, y_position;
+
 
 
 void draw_stats()
@@ -23,12 +29,11 @@ void draw_stats()
   fill(0, 170, 30, 255);
   textSize(60);
   x_position = 10;
-  y_position = i_area_of_interest_offset_Y + i_area_of_interest_height + 10;
+  y_position = i_area_of_interest_offset_Y + i_area_of_interest_height + i_area_of_interest_offset_Y +5;
   text("SCORE: ", x_position , y_position , 400, 90);
   fill(255, 0, 0, 255);
   x_position = 220;
-  y_position = i_area_of_interest_offset_Y + i_area_of_interest_height + 10;
-  text(String.valueOf(nf(i_total_score,3)), x_position , y_position , 200.0, 90.0);
+  text(String.valueOf(i_total_score), x_position , y_position , 200.0, 90.0);
   
   //TIME label
   fill(0, 170, 30, 255);
@@ -43,6 +48,7 @@ void draw_reload_rectangle(int position_X, int position_Y, int size_X, int size_
 {
   b_timer = false;
   fill(255,0 , 0); //red
+  fill(100); //red
   rect(position_X, position_Y, size_X, size_Y);
   fill(255);
   textSize(36);

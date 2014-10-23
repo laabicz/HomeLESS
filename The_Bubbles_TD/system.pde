@@ -22,17 +22,15 @@ int i_total_score = 0;
 int i_area_of_interest_width = 640, i_area_of_interest_height = 480;
 //int i_area_of_interest_width = 800, i_area_of_interest_height = 600;
 
-int i_area_of_interest_background = 255;
-int i_area_of_interest_offset_X = 20;
-int i_area_of_interest_offset_Y = 20;
-int x_position, y_position;
+
 
 boolean b_timer = false;
 int i_time_of_shooting_millis_started;
 int i_time_of_shooting_millis; //millis();
 float f_time_of_shooting;
 int i_time_of_penalty = 0;
-float f_time_of_shoting_maximum = 10.0;  //10- for mouse, 30 for shooting
+int i_penalty_counter = 0;
+float f_time_of_shoting_maximum = 30.0;  //10- for mouse, 30 for shooting
 
 
 
@@ -99,6 +97,9 @@ void check_hit_score(float hit_X, float hit_Y)
 
 void shoot_the_reset(float hit_X, float hit_Y)
 {
+  System.out.println("hit_X: " + hit_X);
+  System.out.println("hit_Y: " + hit_Y);
+  
   int i_border_X_left = i_reload_rectangle_position_X;
   int i_border_X_right = i_reload_rectangle_position_X + i_reload_rectangle_size_X;
   int i_border_Y_up = i_reload_rectangle_position_Y + i_reload_rectangle_size_Y;
@@ -115,6 +116,8 @@ void shoot_the_reset(float hit_X, float hit_Y)
     }
   }
   
+
+  
   if(b_hit_in_square)
   {
     reset();
@@ -130,6 +133,7 @@ void reset()
   i_total_score = 0;
   i_time_of_penalty = 0;
   f_time_of_shooting = 0;
+  i_penalty_counter = 0;
   i_ball_left = i_number_of_balls;
   b_timer = false;
 }
@@ -149,7 +153,7 @@ void mousePressed()
   shoot_the_ball(mouseX, mouseY);
   if(i_ball_left == 0)
   {
-    shoot_the_reset(mouseX + i_area_of_interest_offset_X, mouseY + i_area_of_interest_offset_Y);
+    shoot_the_reset(mouseX, mouseY);
   };
 }
 

@@ -8,7 +8,7 @@ laabicz@gmail.com
 
 www.homeless-eng.webnode.com
 
-last rev. 2014-10-22  (yyyy-mm-dd)
+last rev. 2014-10-23  (yyyy-mm-dd)
 ******************************************
 */
 
@@ -26,6 +26,8 @@ void setup()
   size(i_window_ressolution_X, i_window_ressolution_Y);
   smooth();
   background(200);
+  
+  
   
   udp = new UDP( this, i_Source_port, s_Source_IP_addres );
   udp.log( false );        // <-- printout the connection activity
@@ -46,8 +48,8 @@ void setup()
 void draw()
 {
   //refresh border of area of interest window
-  fill(200);
-  rect(0, 0, i_area_of_interest_offset_X + i_area_of_interest_width + 5, i_window_ressolution_Y);
+  fill(0);
+  rect(0, 0, i_area_of_interest_width + (2 * i_area_of_interest_offset_X), i_area_of_interest_height + (2 * i_area_of_interest_offset_Y));
   //refresh area of interest
   fill(i_area_of_interest_background);
   rect(i_area_of_interest_offset_X, i_area_of_interest_offset_Y, i_area_of_interest_width, i_area_of_interest_height);
@@ -105,10 +107,15 @@ void draw()
     {
       myBall[i].hit = true;
       i_ball_left = 0;
-      f_time_of_shooting = 10;
+      f_time_of_shooting = f_time_of_shoting_maximum;
     }
   }
   
+ 
+  
+  //refresh area of stats
+  fill(200);
+  rect(0 , i_area_of_interest_offset_Y + i_area_of_interest_height + 20 , i_area_of_interest_offset_X + i_area_of_interest_width, i_area_of_interest_height);
   draw_stats();
 }
 
