@@ -30,16 +30,27 @@ int i_time_of_shooting_millis; //millis();
 float f_time_of_shooting;
 int i_time_of_penalty = 0;
 int i_penalty_counter = 0;
+int i_penalty_per_reload = 5;
 float f_time_of_shoting_maximum = 30.0;  //10- for mouse, 30 for shooting
 
 
 
 int i_reload_rectangle_size_X = 300;
 int i_reload_rectangle_size_Y = 100;
-int i_reload_rectangle_position_X = i_area_of_interest_offset_X + (i_area_of_interest_width / 2) + (i_reload_rectangle_size_X / 2) - i_reload_rectangle_size_X ;
-int i_reload_rectangle_position_Y = i_area_of_interest_offset_Y + (i_area_of_interest_height / 2) - (i_reload_rectangle_size_Y / 2);
+int i_reload_rectangle_position_X;
+int i_reload_rectangle_position_Y;
 
 
+void variables_setup()
+{
+  
+  i_window_resolution_X = i_area_of_interest_width + (2 * i_area_of_interest_offset_X) + 240;
+  i_window_resolution_Y = i_area_of_interest_height + (2 * i_area_of_interest_offset_Y) + 80;
+  
+  i_reload_rectangle_position_X = i_area_of_interest_offset_X + (i_area_of_interest_width / 2) + (i_reload_rectangle_size_X / 2) - i_reload_rectangle_size_X ;
+  i_reload_rectangle_position_Y = i_area_of_interest_offset_Y + (i_area_of_interest_height / 2) - (i_reload_rectangle_size_Y / 2);
+  
+}
 
 void shoot_the_bubble(float X, float Y)
 {
@@ -147,6 +158,9 @@ void stop_shooting()
     i_bubble_left = 0;
   }
 }
+
+
+
 
 void mousePressed()
 {

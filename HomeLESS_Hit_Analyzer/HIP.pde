@@ -15,7 +15,7 @@ along with HomeLESS Hit Analyzer.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 
-public boolean b_hip_enable = false, b_hit_sent = false;
+public boolean b_hip_enable = false, b_hit_sent = false, b_hip_invert_X = false, b_hip_invert_Y = false;
 
 public String s_Destination_IP_address;// = "127.0.0.1";
 public String s_Source_IP_address, s_SID;
@@ -55,10 +55,35 @@ void HIP_setup()
      hip_ini_file_contain_parts = split(hip_ini_file_contain[10], "="); //source port
      i_Destination_port = Integer.valueOf(hip_ini_file_contain_parts[1].trim()).intValue();
      
+     // others
+     hip_ini_file_contain_parts = split(hip_ini_file_contain[13], "="); // Invert X
+     if(Integer.valueOf(hip_ini_file_contain_parts[1].trim()).intValue() > 0)
+     {
+       b_hip_invert_X = true; //"0" by default
+     };
+     
+     hip_ini_file_contain_parts = split(hip_ini_file_contain[14], "="); // Invert Y
+     if(Integer.valueOf(hip_ini_file_contain_parts[1].trim()).intValue() > 0)
+     {
+       b_hip_invert_Y = true; //"0" by default
+     };
+
      // HIP status info
      System.out.println("\nHIP enabled");
      println("  - Listenig on adress: " + s_Source_IP_address +", port: " + i_Source_port + ", SID: " + s_SID);
-     println("  - Sending to adress: " + s_Destination_IP_address +", port: " + i_Destination_port + "\n");
+     println("  - Sending to adress: " + s_Destination_IP_address +", port: " + i_Destination_port);
+     if(b_hip_invert_X)
+     {
+       println("  - X axis inverted");
+     }
+     
+     if(b_hip_invert_Y)
+     {
+       println("  - Y axis inverted");
+     }
+     
+     println("\n");
+     
      s_HIP_message = "HA-0200-"+ s_SID + "- Hello world!";
      udp.send( s_HIP_message, s_Destination_IP_address, i_Destination_port );
    }
@@ -70,8 +95,6 @@ void send_hit_position()
 {
    if(b_hip_enable && b_Hit_detected ) // normal style
      {
-        
-       
         // formats the message for Pd
         //hit, unremaped:
         s_HIP_message =  "HA-0100-"  + s_SID +"-" + s_hit_X_temp + "-" + s_hit_Y_temp + "-" + String.valueOf(nf(hit_points_actual,2)) + "-" +s_time_of_hit_detection_relative;
@@ -82,8 +105,19 @@ void send_hit_position()
               {
                 float f_hit_X_temp, f_hit_Y_temp;
                 //println("\nHit position remaped");
-                f_hit_X_temp = map(f_hit_X, side_A1X, side_B2X, f_hit_remap_range_min_X, f_hit_remap_range_max_X);
+                f_hit_X_temp = map(f_hit_X, side_A1X, side_B2X, f_hit_remap_range_min_X, f_hit_remap_range_max_X);//remap by monoscope
                 f_hit_Y_temp = map(f_hit_Y, side_A1Y, side_B2Y, f_hit_remap_range_min_Y, f_hit_remap_range_max_Y);
+                
+                if(b_hip_invert_X)
+                {
+                  f_hit_X_temp = f_hit_remap_range_max_X - f_hit_X_temp;
+                }
+                
+                if(b_hip_invert_Y)
+                {
+                  f_hit_Y_temp = f_hit_remap_range_max_Y - f_hit_Y_temp;
+                }
+                
                 s_hit_X_temp = (nf(f_hit_X_temp,4,1)).substring(0,4) + "." + (nf(f_hit_X_temp,4,1)).substring(5);  //replace "," by "."
                 s_hit_Y_temp = (nf(f_hit_Y_temp,4,1)).substring(0,4) + "." + (nf(f_hit_Y_temp,4,1)).substring(5);
                 //println("New hit X position: " + s_hit_X_temp);

@@ -2,13 +2,13 @@
 ******************************************
 HomeLESS - Hit Analyzer
 Home Laser Shooting Simulator - Hit Analyzer
-version 1.2a
+version 1.2b devel
 by Laabicz
 laabicz@gmail.com
 
 www.homeless-eng.webnode.com
 
-last rev. 2014-10-20  (yyyy-mm-dd)
+last rev. 2014-10-29  (yyyy-mm-dd)
 ******************************************
 
 This HomeLESS_Hit_Analyzer.pde is part of HomeLESS Hit Analyzer.
@@ -27,10 +27,15 @@ along with HomeLESS Hit Analyzer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 
-import codeanticode.gsvideo.*;
+import codeanticode.gsvideo.*;  //replace this in ver. 1.3
 import processing.opengl.*;
 import hypermedia.net.*;    // import UDP library
 import g4p_controls.*;
+import ddf.minim.*;
+
+
+Minim minim;
+AudioSample shot_sample;
 
 GSCapture video;
 
@@ -66,10 +71,13 @@ GDropList dropList_weapon_selection;
 void setup()
 {
   System.out.println("\nJava Runtime Enviroment is present.\n");
+  
   //println("\n\nStarting HomeLESS Hit Analyzer... \n\n"); add this mesage into startup script
   //frameRate(30);
   check_basic_files();
   load_ha_ini();
+  
+  minim = new Minim(this); //enable sound
   HIP_setup();
   generate_list_of_targets_files();
   generate_list_of_gun_files();
@@ -148,9 +156,19 @@ void draw()
     draw_position_of_hit();
     hit_points_calculation();
     stop_analyze_when_hit_detected(); //enable b_hit_detected
+    // only when hit detected
     stop_analyze_when_hitcount_overflow();
     write_to_shoot_log();
-    send_hit_position(); // only when hit detected 
+    send_hit_position();
+    
+    if(b_Hit_detected)
+    {
+      if(b_sound_enabled)
+      {
+      play_gunshot_sample();
+      }
+    };
+
     b_Hit_detected = false;
     //stop_by_style();
     stop_by_limits();

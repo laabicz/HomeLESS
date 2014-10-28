@@ -231,10 +231,17 @@ public void load_weapon_file()
     {
       new_shooting_start_time = 1;
     };
-
+    
   i_new_shooting_start_time_start_value = new_shooting_start_time;
   f_hit_sight_offset_X = Float.valueOf(contain[4]).floatValue() - 5000;
   f_hit_sight_offset_Y = Float.valueOf(contain[5]).floatValue() - 5000;
+  
+  
+  
+  
+  //shot_sample = minim.loadSample("weapons/default_gunshot.mp3", 512); // filename , buffer size
+  shot_sample = minim.loadSample(s_gunshot_path +s_gunshot_filename, 512); // filename , buffer size
+  
   println("\nWeapon file loaded");
   println(" -Weapon name: " + s_weapon_name);
   println(" -Weapon caliber: " + s_projectile_diameter + s_Caliber_units );

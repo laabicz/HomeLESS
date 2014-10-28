@@ -155,11 +155,11 @@ void find_position_of_hit()
         // Get the color stored in the pixel
         int pixelValue = video.pixels[index];
         // Determine the brightness of the pixel
-        float pixelBrightness = brightness(pixelValue);
+        float pixelBrightness = brightness(pixelValue);//8-bit only :(
         // filttering the brightest pixel
         if (pixelBrightness > i_detection_level) //sensitive
         {
-         // If that value is brighter than any previous, then store the
+          // If that value is brighter than any previous, then store the
         // brightness of that pixel, as well as its (x,y) location
         // This select the first brightest pixel
           if (pixelBrightness > brightestValue)

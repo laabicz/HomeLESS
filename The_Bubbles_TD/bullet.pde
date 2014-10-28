@@ -33,7 +33,7 @@ void bullet_reload()
     //sound_reload.trigger();
     i_bullets_left_counter =  i_number_of_bullets;
     //i_time_of_penalty++;
-    i_time_of_penalty += 2;
+    i_time_of_penalty += i_penalty_per_reload;
     i_penalty_counter++;
     System.out.println("Penalty for reload, +2 second.");
 }

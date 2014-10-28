@@ -16,7 +16,7 @@ along with HomeLESS Hit Analyzer.  If not, see <http://www.gnu.org/licenses/>.
 
 
 // bolean, initial value
-public boolean b_Configure = true, b_Shooting = false, b_Hit_detected = false, b_show_last_hit = false, b_sound, b_ballistics, b_shortcuts = true, b_shoot_stop = false, b_shooting_prepare = false, b_time_of_shooting_s = false; // Mode
+public boolean b_Configure = true, b_Shooting = false, b_Hit_detected = false, b_show_last_hit = false, b_sound_enabled = false, b_ballistics, b_shortcuts = true, b_shoot_stop = false, b_shooting_prepare = false, b_time_of_shooting_s = false; // Mode
 public boolean b_training_style = false, b_hunting_style = false, b_combat_style = false, b_sport_style = false, b_freerun_style = false; //Shooting style
 public boolean b_autoshootlog = false, b_autoshootlog_written = true, b_hold_last_hit = false, b_invert_hit_X = false;
 public boolean b_monoscope_synchronization_enabled = false;

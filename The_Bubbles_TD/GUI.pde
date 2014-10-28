@@ -15,15 +15,17 @@ along with HomeLESS: The Bubbles.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 
-//int i_area_of_interest_background = 200;
-int i_area_of_interest_background = 255;
+int i_area_of_interest_background = 200;
+//int i_area_of_interest_background = 255;
 int i_area_of_interest_offset_X = 20;
 int i_area_of_interest_offset_Y = 20;
 int x_position, y_position;
 
-int i_area_of_interest_width = 640, i_area_of_interest_height = 480;
-int i_window_resslution_X = i_area_of_interest_width + (2 * i_area_of_interest_offset_X) + 240;
-int i_window_resslution_Y = i_area_of_interest_height + (2 * i_area_of_interest_offset_Y) + 80;
+//int i_area_of_interest_width = 800, i_area_of_interest_height = 600;
+int i_area_of_interest_width, i_area_of_interest_height;
+int i_window_resolution_X;
+int i_window_resolution_Y;
+
 
 void draw_stats()
 {
@@ -54,6 +56,7 @@ void draw_reload_rectangle(int position_X, int position_Y, int size_X, int size_
   rect(position_X, position_Y, size_X, size_Y);
   fill(255);
   textSize(36);
-  text("HIT HERE\nTO START! ", x_position - size_X , position_Y, 240, 120);
+  text("HIT HERE\nTO START! ", position_X + 55, position_Y, 240, 120);
+
 }
 

@@ -14,7 +14,7 @@ last rev. 2014-10-23  (yyyy-mm-dd)
 
 
 import ddf.minim.*;
-
+import g4p_controls.*;
 
 
 Minim minim;
@@ -22,8 +22,11 @@ AudioSample sound_shoot, sound_reload;
 
 void setup()
 {
+  load_bubbles_ini();
+  variables_setup();
+  
   frameRate(30);
-  size(i_window_resslution_X, i_window_resslution_Y);
+  size(i_window_resolution_X, i_window_resolution_Y);
   smooth();
   background(200);
   
