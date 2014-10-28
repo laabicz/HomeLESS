@@ -1,5 +1,5 @@
 /*
-This ball.pde is part of HomeLESS: The Bubbles TD.
+This bubble.pde is part of HomeLESS: The Bubbles TD.
 
 HomeLESS: The Bubbles TD is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -21,7 +21,9 @@ int i_area_of_interest_offset_X = 20;
 int i_area_of_interest_offset_Y = 20;
 int x_position, y_position;
 
-
+int i_area_of_interest_width = 640, i_area_of_interest_height = 480;
+int i_window_resslution_X = i_area_of_interest_width + (2 * i_area_of_interest_offset_X) + 240;
+int i_window_resslution_Y = i_area_of_interest_height + (2 * i_area_of_interest_offset_Y) + 80;
 
 void draw_stats()
 {

@@ -55,14 +55,14 @@ void receive( byte[] data, String ip, int port )
         println( "sentY: " +sentY);
         
          //reset the program
-        if(i_ball_left == 0)
+        if(i_bubble_left == 0)
         {
           shoot_the_reset(sentX + i_area_of_interest_offset_X, sentY + i_area_of_interest_offset_Y);
         };
         
-        shoot_the_ball(sentX + i_area_of_interest_offset_X, sentY + i_area_of_interest_offset_Y);
+        shoot_the_bubble(sentX + i_area_of_interest_offset_X, sentY + i_area_of_interest_offset_Y);
         
-        println( "i_ball_left: " + i_ball_left);
+        println( "i_bubble_left: " + i_bubble_left);
        
         
         //ellipse(sentX + i_area_of_interest_offset_X, sentY + i_area_of_interest_offset_Y, 5, 5);
@@ -73,7 +73,7 @@ void receive( byte[] data, String ip, int port )
       }
     if(s_HIP_message_ID.equals("0199"))
     {
-      shoot_the_ball(0, 0); // this hit position is out of area of interest
+      shoot_the_bubble(0, 0); // this hit position is out of area of interest
     }
     //println( "received message from Hit Analyzer: ");
   }
