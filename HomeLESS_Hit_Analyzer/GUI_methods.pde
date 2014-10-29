@@ -331,6 +331,8 @@ void draw_sensitivity()
   fill(255, 0, 0, 255);
   textSize(24);
   text(s_Sensitivity  + s_colon_with_space  + nf(i_sensitivity,2) , x_position, y_position, 250, 300);
+  y_position += 30;
+  text(s_Amplify  + s_colon_with_space  + int(f_brightness_amplifier * 100) + "%" , x_position, y_position, 250, 300);
   } 
 }
 

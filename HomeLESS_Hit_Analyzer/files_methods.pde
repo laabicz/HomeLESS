@@ -40,7 +40,7 @@ String[] s_shoot_logs = new String[145];
 String s_language_file, s_current_language, s_shoot_log_contain ,s_shootlog_full_filename, s_Shootlog_filename;
 public String s_colon_with_space = ": ", s_selected_target_name;
 //translationable variables :)
-public String s_Sensitivity, s_Conditions, s_Shooter_name, s_Distance, s_Simulated_distance, s_Real_distance, s_Weapon;
+public String s_Sensitivity, s_Amplify = "Amplify", s_Conditions, s_Shooter_name, s_Distance, s_Simulated_distance, s_Real_distance, s_Weapon;
 public String s_Date, s_Hour, s_Average, s_Target_name;
 public String s_Shootlog_version, s_Target_file, s_Target_type;
 

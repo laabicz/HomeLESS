@@ -956,9 +956,23 @@ void keyPressed()
         target_scale = 1;
       }
      
+      if( key == 109 && b_Configure)  // key == m
+      {    
+        f_brightness_amplifier += 0.05;
+        System.out.println("f_brightness_amplifier: " + f_brightness_amplifier);
+      }   
      
-     
-     
+      if( key == 110 && b_Configure)  // key == n
+      {    
+        f_brightness_amplifier -= 0.05;
+        System.out.println("f_brightness_amplifier: " + f_brightness_amplifier);
+      } 
+      
+      if( key == 103 && b_Configure)  // key == g
+      {    
+        f_brightness_amplifier = 1;
+        System.out.println("f_brightness_amplifier: " + f_brightness_amplifier);
+      } 
    
      
     }

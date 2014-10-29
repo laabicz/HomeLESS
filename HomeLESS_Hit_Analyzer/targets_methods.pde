@@ -20,6 +20,7 @@ public int t_black_center_image_size_autoscaled, t_white_border_image_size_autos
 public float f_targets_diameters[];
 public float f_hit_X = -5000, f_hit_Y = -5000,last_f_hit_Y = -5000, last_f_hit_X = -5000, f_delta_X, f_delta_Y;
 public int brightestX_high, brightestX_low, brightestY_high, brightestY_low, brightestValue, i_detection_level = 254;
+public float pixel_brightness, f_brightness_amplifier = 1;
 public int hit_points_actual =0, hit_points_last = 0, hit_points_sum = 0, hit_counter = 0, hit_areas_ok = 0;
 public float f_projectile_diameter, txt_f_projectile_diameter;
 public float f_current_radius, f_maximum_radius, f_diameter_scale, f_diameter_scale_autoscaled, f_radius_scale, target_scale, f_center_range = 0, square_max_lenght, f_square_scale, last_target_scale = 0;
@@ -155,16 +156,17 @@ void find_position_of_hit()
         // Get the color stored in the pixel
         int pixelValue = video.pixels[index];
         // Determine the brightness of the pixel
-        float pixelBrightness = brightness(pixelValue);//8-bit only :(
+        pixel_brightness = brightness(pixelValue);//8-bit only :(
         // filttering the brightest pixel
-        if (pixelBrightness > i_detection_level) //sensitive
+        pixel_brightness *= f_brightness_amplifier;
+        if (pixel_brightness > i_detection_level) //sensitive
         {
           // If that value is brighter than any previous, then store the
         // brightness of that pixel, as well as its (x,y) location
         // This select the first brightest pixel
-          if (pixelBrightness > brightestValue)
+          if (pixel_brightness > brightestValue)
           {
-            brightestValue = int(pixelBrightness);
+            brightestValue = int(pixel_brightness);
             brightestY_high = y;
             brightestX_high = x;
           }
