@@ -234,7 +234,7 @@ class Bubble
       ellipse(f_bubble_position_X, f_bubble_position_Y, i_bubble_diameter_big, i_bubble_diameter_big);
       
       //middle
-      fill(255);
+      fill(200);
       ellipse(f_bubble_position_X, f_bubble_position_Y, i_bubble_radius_middle * 2, i_bubble_radius_middle * 2);
       
       //center

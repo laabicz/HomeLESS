@@ -15,7 +15,8 @@ along with HomeLESS: The Bubbles.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 Bullet[] myBullet;
-int i_number_of_bullets = 10, i_bullets_left_counter;;
+int i_number_of_bullets; //same as bubbles, see files
+int i_bullets_left_counter;
 
 void bullet_init(int numbers)
 {
@@ -35,7 +36,7 @@ void bullet_reload()
     //i_time_of_penalty++;
     i_time_of_penalty += i_penalty_per_reload;
     i_penalty_counter++;
-    System.out.println("Penalty for reload, +2 second.");
+    System.out.println("Penalty for reload, +"+ i_penalty_per_reload + " second.");
 }
 
 class Bullet

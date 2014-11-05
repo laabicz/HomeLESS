@@ -19,13 +19,26 @@ import hypermedia.net.*;    // import UDP library
 
 UDP udp;  // define the UDP object (sets up)
 
-String s_Destination_IP_addres = "127.0.0.1";
 String s_Source_IP_addres = "127.0.0.1";
-
-int i_Destination_port = 56789;
 int i_Source_port = 58618;
 //int i_resolution_X = 640;
 //int i_resolution_Y = 480;
+
+
+void HIP_init()
+{
+  udp = new UDP( this, i_Source_port, s_Source_IP_addres );
+  udp.log( false );        // <-- printout the connection activity
+  udp.listen( true );
+  System.out.println("HIP enabled");
+  System.out.println("Source IP addres: " + s_Source_IP_addres);
+  System.out.println("Source port: " + i_Source_port);
+}
+
+
+
+
+
 
 
 // void receive( byte[] data ) {            // <-- default handler

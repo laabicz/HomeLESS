@@ -24,13 +24,13 @@ int i_total_score = 0;
 
 
 
-boolean b_timer = false;
+boolean b_timer = false, b_sound_enable = false, b_HIP_enable = false;
 int i_time_of_shooting_millis_started;
 int i_time_of_shooting_millis; //millis();
 float f_time_of_shooting;
 int i_time_of_penalty = 0;
 int i_penalty_counter = 0;
-int i_penalty_per_reload = 5;
+int i_penalty_per_reload = 10;
 float f_time_of_shoting_maximum = 30.0;  //10- for mouse, 30 for shooting
 
 
@@ -44,7 +44,7 @@ int i_reload_rectangle_position_Y;
 void variables_setup()
 {
   
-  i_window_resolution_X = i_area_of_interest_width + (2 * i_area_of_interest_offset_X) + 240;
+  i_window_resolution_X = i_area_of_interest_width + (2 * i_area_of_interest_offset_X) + 40;//+ 240;
   i_window_resolution_Y = i_area_of_interest_height + (2 * i_area_of_interest_offset_Y) + 80;
   
   i_reload_rectangle_position_X = i_area_of_interest_offset_X + (i_area_of_interest_width / 2) + (i_reload_rectangle_size_X / 2) - i_reload_rectangle_size_X ;
@@ -55,7 +55,6 @@ void variables_setup()
 void shoot_the_bubble(float X, float Y)
 {
   b_timer = true;
-  sound_shoot.trigger();
   check_hit_score(X, Y);
   System.out.println("X: " + X);
   System.out.println("Y: " + Y);
@@ -87,6 +86,11 @@ void check_hit_score(float hit_X, float hit_Y)
       if (dist(f_hit_position_X, f_hit_position_Y, bubble[i].f_bubble_position_X, bubble[i].f_bubble_position_Y) < i_bubble_radius_big)
       {
         bubble[i].hit=true;
+        //sound here
+        if(b_sound_enable)
+        {
+          sound_shoot.trigger();
+        }
         i_bubble_left--;
         i_current_score = 5;
         if (dist(f_hit_position_X, f_hit_position_Y, bubble[i].f_bubble_position_X, bubble[i].f_bubble_position_Y) < i_bubble_radius_middle)
@@ -164,11 +168,14 @@ void stop_shooting()
 
 void mousePressed()
 {
-  shoot_the_bubble(mouseX, mouseY);
   if(i_bubble_left == 0)
   {
     shoot_the_reset(mouseX, mouseY);
-  };
+  }
+  else
+  {
+  shoot_the_bubble(mouseX, mouseY);
+  }
 }
 
 
@@ -185,7 +192,7 @@ void keyPressed()
   {
     reset();
     stop_shooting();
-    System.out.println("reset key s pressed");
+    System.out.println("Reset key s pressed");
   }
   
 }

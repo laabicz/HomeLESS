@@ -2,13 +2,13 @@
 ******************************************
 HomeLESS: The Bubbles TD
 Home Laser Shooting Simulator: The Bubbles TD
-version 0.5a
+version 0.9b
 by Laabicz
 laabicz@gmail.com
 
 www.homeless-eng.webnode.com
 
-last rev. 2014-10-23  (yyyy-mm-dd)
+last rev. 2014-10-30  (yyyy-mm-dd)
 ******************************************
 */
 
@@ -22,6 +22,7 @@ AudioSample sound_shoot, sound_reload;
 
 void setup()
 {
+  System.out.println("The Bubbles TD starting...\n");
   load_bubbles_ini();
   variables_setup();
   
@@ -30,13 +31,20 @@ void setup()
   smooth();
   background(200);
   
-  udp = new UDP( this, i_Source_port, s_Source_IP_addres );
-  udp.log( false );        // <-- printout the connection activity
-  udp.listen( true );
+  if(b_HIP_enable)
+  {
+    
+    HIP_init();
+  }
+  else
+  {
+    
+  }
+  
   
   minim = new Minim(this);
-
   sound_shoot = minim.loadSample( "hit.mp3", 512); // filename , buffer size
+  
   
   //bubbles_init(i_number_of_bubbles);
   bubbles_init(20);  //visible only number of bubbles
