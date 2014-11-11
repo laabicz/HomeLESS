@@ -40,7 +40,7 @@ String[] s_shoot_logs = new String[145];
 String s_language_file, s_current_language, s_shoot_log_contain ,s_shootlog_full_filename, s_Shootlog_filename;
 public String s_colon_with_space = ": ", s_selected_target_name;
 //translationable variables :)
-public String s_Sensitivity, s_Amplify = "Amplify", s_Conditions, s_Shooter_name, s_Distance, s_Simulated_distance, s_Real_distance, s_Weapon;
+public String s_Sensitivity, s_Amplify, s_Conditions, s_Shooter_name, s_Distance, s_Simulated_distance, s_Real_distance, s_Weapon;
 public String s_Date, s_Hour, s_Average, s_Target_name;
 public String s_Shootlog_version, s_Target_file, s_Target_type;
 
@@ -100,6 +100,7 @@ public void load_ha_ini()
   int i_video_width_line = 3;
   int i_video_height_line = 4;
   int i_sensitivity_line = 5;
+  //int i_amplify_line = 6;  //future
   //general settings
   int i_shooter_name_line = 8;
   int i_weapon_file_line = 9; 
@@ -301,15 +302,16 @@ public void load_lang_pack()
   s_Countdown = contain[17];
   s_Autoshootlog = contain[18];
   s_Sensitivity = contain[19];
-  s_Rear_cam = contain[20];
-  s_SLH = contain[21];
+  s_Amplify = contain[20];
+  s_Rear_cam = contain[21];
+  s_SLH = contain[22];
   
   //target, contain[22] is clear
-  s_Select_target_label = contain[23];
-  s_Correction_label = contain[24];
-  s_Simulated_distance = contain[25];
-  s_Real_distance = contain[26];  
-  s_Use_metric_system =  contain[27];  
+  s_Select_target_label = contain[24];
+  s_Correction_label = contain[25];
+  s_Simulated_distance = contain[26];
+  s_Real_distance = contain[27];  
+  s_Use_metric_system =  contain[28];  
   
   s_distance_units = s_meters;
   if(b_distance_units_are_metric == false)
@@ -318,18 +320,18 @@ public void load_lang_pack()
     };
   
   //Weapon
-  s_weapon_profile_label = contain[29];
-  s_weapon_name_label = contain[30];
-  s_Sights_adjustment = contain[31];
+  s_weapon_profile_label = contain[30];
+  s_weapon_name_label = contain[31];
+  s_Sights_adjustment = contain[32];
   
   //Shootlog
-  s_Date = contain[33];
-  s_Hour = contain[34];
-  s_Average = contain[35];
-  s_Target_name = contain[36];
-  s_Shootlog_version = contain[37]; 
-  s_Target_file = contain[38];
-  s_Target_type = contain[39];
+  s_Date = contain[34];
+  s_Hour = contain[35];
+  s_Average = contain[36];
+  s_Target_name = contain[37];
+  s_Shootlog_version = contain[38]; 
+  s_Target_file = contain[39];
+  s_Target_type = contain[40];
   /****Unused***/
   //s_Correction = contain[1];
   //s_Target_select = contain[7];

@@ -14,6 +14,8 @@ You should have received a copy of the GNU General Public License
 along with HomeLESS Hit Analyzer.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+GWindow windowGeneral_settings;
+
 GLabel lblTime, lblShooter, lblAutoshootlog, lblSensitivity;
 GLabel lblTimelimit, lblHitslimit, lblCount_up, lblCount_down, lblRear_cam, lblCountdown_timer;
 GCheckbox cbxAutoshootlog, cbxLimitedbytime, cbxLimitedbyhits, cbxCountdown_timer, cbxRearcam;
@@ -24,7 +26,9 @@ public String s_Hit_limits,  s_Time_limit, s_Countdown,  s_Autoshootlog, s_Rear_
 public void createWindowGeneral_settings()
 { 
   
-  windowGeneral_settings = new GWindow(this, "HA - General Settings", 800, 200, 380, 160, false, JAVA2D);
+  //windowGeneral_settings = new GWindow(this, "HA - General Settings", 800, 200, 380, 160, false, JAVA2D);
+  windowGeneral_settings = new GWindow(this, "HA - General Settings", 800, 200, 380, 160, false, P2D);  
+  windowGeneral_settings.addDrawHandler(this, "windowGeneral_settings_draw");
   PApplet win_general = windowGeneral_settings.papplet;
   
   windowGeneral_settings.setActionOnClose(GWindow.CLOSE_WINDOW);
@@ -147,6 +151,20 @@ public void createWindowGeneral_settings()
   
 }
 
+
+
+synchronized public void windowGeneral_settings_draw(GWinApplet appc, GWinData data)
+{
+  appc.background(backround_color);
+  /*
+  //for other drawing
+  appc.fill(0,0,160);
+  appc.noStroke();
+  appc.ellipse(appc.width/2, appc.height/2, appc.width/1.2, appc.height/1.2);
+  appc.fill(255);
+  appc.text("Secondary window", 20, 20);
+  */
+}
 
 
 void handle_txtShooting_Time_Seconds(GTextField textfield, GEvent event)  //Time

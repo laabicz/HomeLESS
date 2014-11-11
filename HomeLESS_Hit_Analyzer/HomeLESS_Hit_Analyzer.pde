@@ -27,7 +27,8 @@ along with HomeLESS Hit Analyzer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 
-import codeanticode.gsvideo.*;  //replace this in ver. 1.3
+//import codeanticode.gsvideo.*;  //replace this in ver. 1.3
+import processing.video.*;
 import processing.opengl.*;
 import hypermedia.net.*;    // import UDP library
 import g4p_controls.*;
@@ -37,8 +38,8 @@ import ddf.minim.*;
 Minim minim;
 AudioSample shot_sample;
 
-GSCapture video;
-
+//GSCapture video;  //old
+Capture video;
 
 GCheckbox cbxSound, cbxShow_last_hit, cbxDiameter;
 
@@ -53,8 +54,7 @@ GImageButton btnHit_sight_autocenter, btnScrollDown, btnScrollUp, btnSensitivity
 GButton btnNextTarget, btnPreviousTarget ;
 GTextField txtShootLog, txtDelay, txtTarget_number, txtShootlog_filename;
 
-//general config
-GWindow windowGeneral_settings;
+
 
 
 
@@ -127,6 +127,7 @@ void draw()
 {
   system_clock_timer();
   
+  
   if (video.available() && (b_Configure || (b_shoot_stop == false)))
   {
     video.read();
@@ -177,6 +178,6 @@ void draw()
   draw_time();
   draw_stats();
   draw_conditions();
-  
+  //background(backround_color);
 };
 

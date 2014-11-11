@@ -16,6 +16,7 @@ along with HomeLESS Hit Analyzer.  If not, see <http://www.gnu.org/licenses/>.
 
 
 GWindow windowTarget_settings;
+
 GTextField txtSimulated_Distance, txtReal_Distance;
 GDropList dropList_target_selection;
 GCheckbox cbxMetric_units;
@@ -28,10 +29,13 @@ public String s_Select_target_label, s_Correction_label, s_meters, s_yards, s_di
 public void createwindowWeapon_target_settings()
 { 
   
-  windowTarget_settings = new GWindow(this, "HA - Target settings", 400, 200, 330, 210, false, JAVA2D);
+  //windowTarget_settings = new GWindow(this, "HA - Target settings", 400, 200, 330, 210, false, JAVA2D);
+  windowTarget_settings = new GWindow(this, "HA - Target settings", 400, 200, 330, 210, false, P2D);
   PApplet win_target = windowTarget_settings.papplet;
   windowTarget_settings.setActionOnClose(GWindow.CLOSE_WINDOW);
+  windowTarget_settings.addDrawHandler(this, "windowTarget_settings_draw");
   
+
   //g4p_controls.GTextAlign.setText(String, );
   //GAlign.LEFT;
  
@@ -146,8 +150,21 @@ public void createwindowWeapon_target_settings()
   btnTarget_sync = new GImageButton(win_target, x_position + 60 , y_position, images);
   btnTarget_sync.tag = "Target_sync";
   */
-  
 }
+
+synchronized public void windowTarget_settings_draw(GWinApplet appc, GWinData data)
+{
+  appc.background(backround_color);
+  /*
+  //for other drawing
+  appc.fill(0,0,160);
+  appc.noStroke();
+  appc.ellipse(appc.width/2, appc.height/2, appc.width/1.2, appc.height/1.2);
+  appc.fill(255);
+  appc.text("Secondary window", 20, 20);
+  */
+}
+
 
 
 public void dropList_target_selection(GDropList source, GEvent event)

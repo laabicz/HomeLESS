@@ -17,6 +17,7 @@ along with HomeLESS Hit Analyzer.  If not, see <http://www.gnu.org/licenses/>.
 
 // weapon config
 GWindow windowWeapon_settings;
+
 GLabel lblWeapon_settings, lblSights_adjustment, lblCaliber;
 GLabel lblCaliber_units, lblWeapon_name,lblWeapon_profile;
 GTextField txtCaliber, txtWeapon_name;
@@ -36,7 +37,10 @@ int i_new_shooting_start_time_start_value = 3;
 public void createwindowWeapon_settings()
 { 
   
-  windowWeapon_settings = new GWindow(this, "HA - Weapon settings", 800, 200, 330, 200, false, JAVA2D);
+  //windowWeapon_settings = new GWindow(this, "HA - Weapon settings", 800, 200, 330, 200, false, JAVA2D);
+  windowWeapon_settings = new GWindow(this, "HA - Weapon settings", 800, 200, 330, 200, false, P2D);
+  windowWeapon_settings.addDrawHandler(this, "windowWeapon_settings_draw"); 
+  
   PApplet win_weapon = windowWeapon_settings.papplet;
   windowWeapon_settings.setActionOnClose(GWindow.CLOSE_WINDOW);
   //windowWeapon_settings.addData(new windowWeapon_settings_data());
@@ -123,6 +127,23 @@ public void createwindowWeapon_settings()
   btnSave_gun = new GImageButton(win_weapon, x_position, y_position, images);
   btnSave_gun.tag= "Save_weapon_settings";
 }
+
+
+
+
+synchronized public void windowWeapon_settings_draw(GWinApplet appc, GWinData data)
+{
+  appc.background(backround_color);
+  /*
+  //for other drawing
+  appc.fill(0,0,160);
+  appc.noStroke();
+  appc.ellipse(appc.width/2, appc.height/2, appc.width/1.2, appc.height/1.2);
+  appc.fill(255);
+  appc.text("Secondary window", 20, 20);
+  */
+}
+
 
 public void handle_txtCaliber(GTextField textfield, GEvent event)
 {
@@ -236,11 +257,9 @@ public void load_weapon_file()
   f_hit_sight_offset_X = Float.valueOf(contain[4]).floatValue() - 5000;
   f_hit_sight_offset_Y = Float.valueOf(contain[5]).floatValue() - 5000;
   
-  
-  
-  
-  //shot_sample = minim.loadSample("weapons/default_gunshot.mp3", 512); // filename , buffer size
-  shot_sample = minim.loadSample(s_gunshot_path +s_gunshot_filename, 512); // filename , buffer size
+  s_gunshot_filename = "default_gunshot.mp3";
+  s_gunshot_path = "sounds/";
+  shot_sample = minim.loadSample("sounds/default_gunshot.mp3", 512); // filename , buffer size
   
   println("\nWeapon file loaded");
   println(" -Weapon name: " + s_weapon_name);
@@ -307,7 +326,7 @@ public void save_weapon_file()
   {
      s_weapon_profile[2] = "inch"; 
   }
-  s_weapon_profile[3] = String.valueOf(i_delay * 100);
+  s_weapon_profile[3] = String.valueOf(new_shooting_start_time * 100);
   s_weapon_profile[4] = String.valueOf(f_hit_sight_offset_X + 5000);
   s_weapon_profile[5] = String.valueOf(f_hit_sight_offset_Y + 5000);
   String s_file_name = "weapons/" + s_selected_weapon_file;
