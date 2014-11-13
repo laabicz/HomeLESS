@@ -37,8 +37,8 @@ int i_new_shooting_start_time_start_value = 3;
 public void createwindowWeapon_settings()
 { 
   
-  //windowWeapon_settings = new GWindow(this, "HA - Weapon settings", 800, 200, 330, 200, false, JAVA2D);
-  windowWeapon_settings = new GWindow(this, "HA - Weapon settings", 800, 200, 330, 200, false, P2D);
+  windowWeapon_settings = new GWindow(this, "HA - Weapon settings", 800, 200, 330, 200, false, JAVA2D);
+  //windowWeapon_settings = new GWindow(this, "HA - Weapon settings", 800, 200, 330, 200, false, P2D);
   windowWeapon_settings.addDrawHandler(this, "windowWeapon_settings_draw"); 
   
   PApplet win_weapon = windowWeapon_settings.papplet;

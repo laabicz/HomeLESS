@@ -100,31 +100,32 @@ public void load_ha_ini()
   int i_video_width_line = 3;
   int i_video_height_line = 4;
   int i_sensitivity_line = 5;
-  //int i_amplify_line = 6;  //future
+  int i_amplify_line = 6;  //future
+  
   //general settings
-  int i_shooter_name_line = 8;
-  int i_weapon_file_line = 9; 
-  int i_language_line = 10;
-  int i_autoshotlog_line = 11;
-  int i_sound_line = 12;
+  int i_shooter_name_line = 9;
+  int i_weapon_file_line = 10; 
+  int i_language_line = 11;
+  int i_autoshotlog_line = 12;
+  int i_sound_line = 13;
   
   //shooting settings
-  int i_rounds_line = 15; 
-  int i_shooting_time_line = 16;
-  int i_time_limit_line = 17;
-  int i_countdown_line = 18;
-  int i_hit_limit_line = 19;
-  int i_SLH_line = 20;
-  int i_shooting_prepare_counter_line = 21;
+  int i_rounds_line = 16; 
+  int i_shooting_time_line = 17;
+  int i_time_limit_line = 18;
+  int i_countdown_line = 19;
+  int i_hit_limit_line = 20;
+  int i_SLH_line = 21;
+  int i_shooting_prepare_counter_line = 22;
 
   //target properties
-  int i_target_file_line = 24;
-  int i_target_scale_line = 25;
-  int i_target_correction_X_line = 26;
-  int i_target_correction_Y_line = 27;
-  int i_simulated_distance_line = 28;
-  int i_real_distance_line = 29;
-  int i_metric_distance_line = 30;
+  int i_target_file_line = 25;
+  int i_target_scale_line = 26;
+  int i_target_correction_X_line = 27;
+  int i_target_correction_Y_line = 28;
+  int i_simulated_distance_line = 29;
+  int i_real_distance_line = 30;
+  int i_metric_distance_line = 31;
   
   
   String[] ha_ini_file_contain = loadStrings("ha.ini");
@@ -142,6 +143,10 @@ public void load_ha_ini()
   
   ha_ini_file_contain_parts = split(ha_ini_file_contain[i_sensitivity_line], "=");
   i_sensitivity = Integer.valueOf(ha_ini_file_contain_parts[1].trim()).intValue();
+  
+  
+  ha_ini_file_contain_parts = split(ha_ini_file_contain[i_amplify_line], "=");
+  f_brightness_amplifier = Float.valueOf(ha_ini_file_contain_parts[1].trim()).floatValue() / 100;
   
   ha_ini_file_contain_parts = split(ha_ini_file_contain[i_rear_camera_line], "=");
   if(Integer.valueOf(ha_ini_file_contain_parts[1].trim()).intValue() == 1)
@@ -592,7 +597,7 @@ public boolean is_hip_ini_file(String name)
 
 public void save_file_ha_ini()
 {
-  String[] s_ha_ini_contain = new String[31];
+  String[] s_ha_ini_contain = new String[32];
   byte byte_rear_cam = 0, byte_autoshootlog = 0, byte_time_limit = 0, byte_SLH = 0, byte_metric_distance = 0, byte_hit_limit = 0, byte_countdown = 0;
   String s_sound_enabled = "0";
   
@@ -643,31 +648,32 @@ public void save_file_ha_ini()
   s_ha_ini_contain[3] = "Video width = " + video_width;
   s_ha_ini_contain[4] = "Video height = " + video_height;
   s_ha_ini_contain[5] = "Sensitivity = " + i_sensitivity;
-  s_ha_ini_contain[6] = "";
-  s_ha_ini_contain[7] = "** General settings **";
-  s_ha_ini_contain[8] = "Shooter = " + s_Shooter_name;
-  s_ha_ini_contain[9] = "Weapon = " + s_selected_weapon_file;
-  s_ha_ini_contain[10] = "Language = " + s_current_language;
-  s_ha_ini_contain[11] = "Autoshootlog = " + byte_autoshootlog;
-  s_ha_ini_contain[12] = "Sound = " + s_sound_enabled;
-  s_ha_ini_contain[13] = "";
-  s_ha_ini_contain[14] = "** Shooting settings **";
-  s_ha_ini_contain[15] = "Rounds = " + i_Rounds;
-  s_ha_ini_contain[16] = "Time = " + i_time_of_shooting_total;
-  s_ha_ini_contain[17] = "Time limit = " + byte_time_limit;
-  s_ha_ini_contain[18] = "Countdown = " + byte_countdown;
-  s_ha_ini_contain[19] = "Hit limit = " + byte_hit_limit;
-  s_ha_ini_contain[20] = "SLH = " + byte_SLH;
-  s_ha_ini_contain[21] = "Prepare = " + i_shooting_prepare;
-  s_ha_ini_contain[22] = "";
-  s_ha_ini_contain[23] = "** Target settings **";
-  s_ha_ini_contain[24] = "Target = " + s_selected_target_name;
-  s_ha_ini_contain[25] = "Scale = " + target_scale;
-  s_ha_ini_contain[26] = "X correction = " + (correction_X + 5000);
-  s_ha_ini_contain[27] = "Y correction = " + (correction_Y + 5000);
-  s_ha_ini_contain[28] = "Simulated distance = " + f_simulated_distance;
-  s_ha_ini_contain[29] = "Real distance = " + f_real_distance;
-  s_ha_ini_contain[30] = "Metric distance = " + byte_metric_distance;
+  s_ha_ini_contain[6] = "Amplify = " + int(f_brightness_amplifier * 100);
+  s_ha_ini_contain[7] = "";
+  s_ha_ini_contain[8] = "** General settings **";
+  s_ha_ini_contain[9] = "Shooter = " + s_Shooter_name;
+  s_ha_ini_contain[10] = "Weapon = " + s_selected_weapon_file;
+  s_ha_ini_contain[11] = "Language = " + s_current_language;
+  s_ha_ini_contain[12] = "Autoshootlog = " + byte_autoshootlog;
+  s_ha_ini_contain[13] = "Sound = " + s_sound_enabled;
+  s_ha_ini_contain[14] = "";
+  s_ha_ini_contain[15] = "** Shooting settings **";
+  s_ha_ini_contain[16] = "Rounds = " + i_Rounds;
+  s_ha_ini_contain[17] = "Time = " + i_time_of_shooting_total;
+  s_ha_ini_contain[18] = "Time limit = " + byte_time_limit;
+  s_ha_ini_contain[19] = "Countdown = " + byte_countdown;
+  s_ha_ini_contain[20] = "Hit limit = " + byte_hit_limit;
+  s_ha_ini_contain[21] = "SLH = " + byte_SLH;
+  s_ha_ini_contain[22] = "Prepare = " + i_shooting_prepare;
+  s_ha_ini_contain[23] = "";
+  s_ha_ini_contain[24] = "** Target settings **";
+  s_ha_ini_contain[25] = "Target = " + s_selected_target_name;
+  s_ha_ini_contain[26] = "Scale = " + target_scale;
+  s_ha_ini_contain[27] = "X correction = " + (correction_X + 5000);
+  s_ha_ini_contain[28] = "Y correction = " + (correction_Y + 5000);
+  s_ha_ini_contain[29] = "Simulated distance = " + f_simulated_distance;
+  s_ha_ini_contain[30] = "Real distance = " + f_real_distance;
+  s_ha_ini_contain[31] = "Metric distance = " + byte_metric_distance;
 
   saveStrings("ha.ini", s_ha_ini_contain);
   System.out.println("\nChanges in configuration has been saved into ha.ini file.\n");
@@ -678,7 +684,7 @@ public void save_file_ha_ini()
 
 public void save_file_default_ha_ini()
 {
-  String[] s_default_ha_ini = {"** Webcam settings **", "Webcam = 6", "Rear cam = 0", "Video width = 640", "Video height = 480", "Sensitivity = 1", "", "** General settings **", "Shooter = Mamlas", "Weapon = default_weapon.gun", "Language = english", "Autoshootlog = 1", "Sound = 1","", "** Shooting settings **", "Rounds = 10", "Time = 30", "Time limit = 1","Countdown = 1" ,"Hit limit = 1", "SLH = 1", "Prepare = 3", "", "** Target settings **", "Target = air_rifle_cz.tgt", "Scale = 1", "X correction = 5000", "Y correction = 5000", "Simulated distance = 10", "Real distance = 5", "Metric distance = 1"};
+  String[] s_default_ha_ini = {"** Webcam settings **", "Webcam = 6", "Rear cam = 0", "Video width = 640", "Video height = 480", "Sensitivity = 1", "Amplify = 100", "", "** General settings **", "Shooter = Mamlas", "Weapon = default_weapon.gun", "Language = english", "Autoshootlog = 1", "Sound = 1","", "** Shooting settings **", "Rounds = 10", "Time = 30", "Time limit = 1","Countdown = 1" ,"Hit limit = 1", "SLH = 1", "Prepare = 3", "", "** Target settings **", "Target = air_rifle_cz.tgt", "Scale = 1", "X correction = 5000", "Y correction = 5000", "Simulated distance = 10", "Real distance = 5", "Metric distance = 1"};
   saveStrings("ha.ini", s_default_ha_ini);
   System.out.println("\nFile \"ha.ini\" has been created with default settings.");
 }

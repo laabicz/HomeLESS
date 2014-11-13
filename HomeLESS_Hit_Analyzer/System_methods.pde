@@ -419,6 +419,9 @@ void stop_analyze_when_hit_detected()
          System.out.println("\nHit detected:");
        }
     }
+    
+    //mod obracene detekce
+    
 };
 void draw_last_hit()
 {
@@ -964,13 +967,20 @@ void keyPressed()
      
       if( key == 109 && b_Configure)  // key == m
       {    
+        //TODO: move this to method
         f_brightness_amplifier += 0.05;
         System.out.println("f_brightness_amplifier: " + f_brightness_amplifier);
       }   
      
       if( key == 110 && b_Configure)  // key == n
       {    
+        //TODO: move this to method
         f_brightness_amplifier -= 0.05;
+        if(f_brightness_amplifier < 0.2)
+        {
+          System.out.println("f_brightness_amplifier cannot go lower...");
+          f_brightness_amplifier = 0.2;
+        }
         System.out.println("f_brightness_amplifier: " + f_brightness_amplifier);
       } 
       

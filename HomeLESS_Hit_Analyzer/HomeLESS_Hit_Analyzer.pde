@@ -41,7 +41,7 @@ AudioSample shot_sample;
 //GSCapture video;  //old
 Capture video;
 
-GCheckbox cbxSound, cbxShow_last_hit, cbxDiameter;
+//GCheckbox cbxShow_last_hit, cbxDiameter;
 
 GToggleGroup optGroup_shooting_style = new GToggleGroup(); //new
 //GOption optTraining, optSport, optCombat, optHunting;  //old
@@ -156,7 +156,10 @@ void draw()
     //*** Draw a point into video ***
     draw_position_of_hit();
     hit_points_calculation();
+    
     stop_analyze_when_hit_detected(); //enable b_hit_detected
+    //TODO: mod obracene detekce
+    
     // only when hit detected
     stop_analyze_when_hitcount_overflow();
     write_to_shoot_log();

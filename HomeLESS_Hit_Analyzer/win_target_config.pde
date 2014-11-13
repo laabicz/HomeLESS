@@ -29,8 +29,8 @@ public String s_Select_target_label, s_Correction_label, s_meters, s_yards, s_di
 public void createwindowWeapon_target_settings()
 { 
   
-  //windowTarget_settings = new GWindow(this, "HA - Target settings", 400, 200, 330, 210, false, JAVA2D);
-  windowTarget_settings = new GWindow(this, "HA - Target settings", 400, 200, 330, 210, false, P2D);
+  windowTarget_settings = new GWindow(this, "HA - Target settings", 400, 200, 330, 210, false, JAVA2D);
+  //windowTarget_settings = new GWindow(this, "HA - Target settings", 400, 200, 330, 210, false, P2D);
   PApplet win_target = windowTarget_settings.papplet;
   windowTarget_settings.setActionOnClose(GWindow.CLOSE_WINDOW);
   windowTarget_settings.addDrawHandler(this, "windowTarget_settings_draw");

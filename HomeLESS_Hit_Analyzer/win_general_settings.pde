@@ -16,9 +16,10 @@ along with HomeLESS Hit Analyzer.  If not, see <http://www.gnu.org/licenses/>.
 
 GWindow windowGeneral_settings;
 
-GLabel lblTime, lblShooter, lblAutoshootlog, lblSensitivity;
+GLabel lblTime, lblShooter, lblAutoshootlog, lblSensitivity, lblSound;
 GLabel lblTimelimit, lblHitslimit, lblCount_up, lblCount_down, lblRear_cam, lblCountdown_timer;
-GCheckbox cbxAutoshootlog, cbxLimitedbytime, cbxLimitedbyhits, cbxCountdown_timer, cbxRearcam;
+GCheckbox cbxAutoshootlog, cbxLimitedbytime, cbxLimitedbyhits, cbxCountdown_timer, cbxRearcam, cbxSound;
+
 GTextField txtShooting_Time_Minutes, txtShooting_Time_Seconds, txtRounds;
 GImageButton btnSave_general;
 public String s_Hit_limits,  s_Time_limit, s_Countdown,  s_Autoshootlog, s_Rear_cam;
@@ -26,8 +27,8 @@ public String s_Hit_limits,  s_Time_limit, s_Countdown,  s_Autoshootlog, s_Rear_
 public void createWindowGeneral_settings()
 { 
   
-  //windowGeneral_settings = new GWindow(this, "HA - General Settings", 800, 200, 380, 160, false, JAVA2D);
-  windowGeneral_settings = new GWindow(this, "HA - General Settings", 800, 200, 380, 160, false, P2D);  
+  windowGeneral_settings = new GWindow(this, "HA - General Settings", 800, 200, 380, 160, false, JAVA2D);
+  //windowGeneral_settings = new GWindow(this, "HA - General Settings", 800, 200, 380, 160, false, P2D);  
   windowGeneral_settings.addDrawHandler(this, "windowGeneral_settings_draw");
   PApplet win_general = windowGeneral_settings.papplet;
   
@@ -130,7 +131,7 @@ public void createWindowGeneral_settings()
   
   //rearcam settings
   x_position = 225;
-  y_position = 40;
+  y_position = 45;
   cbxRearcam = new GCheckbox(win_general, x_position, y_position, 22, 18, "");
   cbxRearcam.setSelected(b_invert_hit_X);
   cbxRearcam.addEventHandler(this, "cbxRearcam_clicked");
@@ -140,6 +141,16 @@ public void createWindowGeneral_settings()
   lblRear_cam.setTextAlign(GAlign.LEFT, GAlign.MIDDLE );
   lblRear_cam.setOpaque(false);
   
+  x_position = 225;
+  y_position += 25;
+  cbxSound = new GCheckbox(win_general, x_position, y_position, 22, 18, "");
+  cbxSound.setSelected(b_sound_enabled);
+  cbxSound.addEventHandler(this, "cbxSound_clicked");
+  x_position += 20;
+  lblSound = new GLabel(win_general, x_position, y_position, 120, 20);
+  lblSound.setText("Sound not var");
+  lblSound.setTextAlign(GAlign.LEFT, GAlign.MIDDLE );
+  lblSound.setOpaque(false);
 
   x_position = 290;
   y_position = 120;
@@ -321,6 +332,23 @@ public void cbxAutoshootlog_clicked(GCheckbox source, GEvent event)
 
 
 
+public void cbxSound_clicked(GCheckbox source, GEvent event)
+{ 
+  //System.out.println("Autoshotlog clicked \n");
+  
+  if(b_sound_enabled == false)
+    {
+      b_sound_enabled = true;
+      System.out.println("\nSound enabled.");
+    }
+  else  //if(b_invert_hit_X == false)
+    {
+      b_sound_enabled = false;
+      System.out.println("\nSound disabled.");
+    };
+  //b_autoshootlog = true;
+  //b_autoshootlog = false;
+};
 
 void check_inserted_time_values_limits()
 {
