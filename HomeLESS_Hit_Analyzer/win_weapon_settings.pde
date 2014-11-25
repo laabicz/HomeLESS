@@ -230,6 +230,7 @@ public void load_weapon_file()
 {
   String s_file_name = "weapons/" + s_selected_weapon_file;
   String[] contain = loadStrings(s_file_name);
+  
   s_weapon_name = contain[0];
   s_projectile_diameter = contain[1];
   f_natural_projectile_diameter  = Float.valueOf(contain[1]).floatValue();
@@ -257,6 +258,13 @@ public void load_weapon_file()
   f_hit_sight_offset_X = Float.valueOf(contain[4]).floatValue() - 5000;
   f_hit_sight_offset_Y = Float.valueOf(contain[5]).floatValue() - 5000;
   
+  //TODO: Try to get sound file (optional). 
+  if(contain.length > 6) //on 7th line is name of sound file, first line is 1
+  {
+    System.out.println("Sound file: " + contain[6]);
+    //shot_sample = minim.loadSample("...
+  }
+  //else load default sound file
   s_gunshot_filename = "default_gunshot.mp3";
   s_gunshot_path = "sounds/";
   shot_sample = minim.loadSample("sounds/default_gunshot.mp3", 512); // filename , buffer size
@@ -265,6 +273,7 @@ public void load_weapon_file()
   println(" -Weapon name: " + s_weapon_name);
   println(" -Weapon caliber: " + s_projectile_diameter + s_Caliber_units );
   println(" -New detection start time: " + (new_shooting_start_time * 100) + " milliseconds\n"  );
+  
 
   
 }

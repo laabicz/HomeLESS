@@ -8,7 +8,7 @@ laabicz@gmail.com
 
 www.homeless-eng.webnode.com
 
-last rev. 2014-10-29  (yyyy-mm-dd)
+last rev. 2014-11-27  (yyyy-mm-dd)
 ******************************************
 
 This HomeLESS_Hit_Analyzer.pde is part of HomeLESS Hit Analyzer.
@@ -27,7 +27,7 @@ along with HomeLESS Hit Analyzer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 
-//import codeanticode.gsvideo.*;  //replace this in ver. 1.3
+//import codeanticode.gsvideo.*;  //replace this in ver. 1.3, -replaced in 1.2b :-)
 import processing.video.*;
 import processing.opengl.*;
 import hypermedia.net.*;    // import UDP library

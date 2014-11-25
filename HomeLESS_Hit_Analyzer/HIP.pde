@@ -84,7 +84,7 @@ void HIP_setup()
      
      println("\n");
      
-     s_HIP_message = "HA-0200-"+ s_SID + "- Hello world!";
+     s_HIP_message = "HA-0200-"+ s_SID + "- Hello world!"; //TODO: replace HA by HIP 
      udp.send( s_HIP_message, s_Destination_IP_address, i_Destination_port );
    }
  else System.out.println("\nHIP disabled \n");
@@ -96,7 +96,7 @@ void send_hit_position()
    if(b_hip_enable && b_Hit_detected ) // normal style
      {
         // formats the message for Pd
-        //hit, unremaped:
+        //hit, unremaped: //TODO: replace HA by HIP 
         s_HIP_message =  "HA-0100-"  + s_SID +"-" + s_hit_X_temp + "-" + s_hit_Y_temp + "-" + String.valueOf(nf(hit_points_actual,2)) + "-" +s_time_of_hit_detection_relative;
 
         if(b_monoscope_synchronization_enabled)//remaped for synchronization with 3th party aplications
@@ -122,12 +122,12 @@ void send_hit_position()
                 s_hit_Y_temp = (nf(f_hit_Y_temp,4,1)).substring(0,4) + "." + (nf(f_hit_Y_temp,4,1)).substring(5);
                 //println("New hit X position: " + s_hit_X_temp);
                 //println("New hit Y position: " + s_hit_Y_temp);
-                s_HIP_message =  "HA-0101-"  + s_SID +"-" + s_hit_X_temp + "-" + s_hit_Y_temp + "-" +s_time_of_hit_detection_relative;
+                s_HIP_message =  "HA-0101-"  + s_SID +"-" + s_hit_X_temp + "-" + s_hit_Y_temp + "-" +s_time_of_hit_detection_relative; //TODO: replace HA by HIP 
               }
             else
               {
                 //println("Hit position is out of range.");
-                s_HIP_message =  "HA-0199-"  + s_SID +"-Hit position is out of range.";
+                s_HIP_message =  "HA-0199-"  + s_SID +"-Hit position is out of range."; //TODO: replace HA by HIP 
               }
           };
         
