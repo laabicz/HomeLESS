@@ -2,13 +2,13 @@
 ******************************************
 HomeLESS - Hit Analyzer
 Home Laser Shooting Simulator - Hit Analyzer
-version 1.2b devel
+version 1.2b
 by Laabicz
 laabicz@gmail.com
 
 www.homeless-eng.webnode.com
 
-last rev. 2014-11-27  (yyyy-mm-dd)
+last rev. 2014-12-22  (yyyy-mm-dd)
 ******************************************
 
 This HomeLESS_Hit_Analyzer.pde is part of HomeLESS Hit Analyzer.
@@ -32,11 +32,12 @@ import processing.video.*;
 import processing.opengl.*;
 import hypermedia.net.*;    // import UDP library
 import g4p_controls.*;
-import ddf.minim.*;
+//import ddf.minim.*;  //not at this version :(
 
-
+/*
 Minim minim;
 AudioSample shot_sample;
+*/
 
 //GSCapture video;  //old
 Capture video;
@@ -77,7 +78,8 @@ void setup()
   check_basic_files();
   load_ha_ini();
   
-  minim = new Minim(this); //enable sound
+  //minim = new Minim(this); //enable sound
+  
   HIP_setup();
   generate_list_of_targets_files();
   generate_list_of_gun_files();
@@ -163,10 +165,11 @@ void draw()
     // only when hit detected
     stop_analyze_when_hitcount_overflow();
     write_to_shoot_log();
-    send_hit_position();
+    //send_hit_position();
     
     if(b_Hit_detected)
     {
+      send_hit_position();
       if(b_sound_enabled)
       {
       play_gunshot_sample();

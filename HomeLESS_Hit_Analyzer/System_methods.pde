@@ -714,9 +714,20 @@ void handleButtonEvents(GImageButton button, GEvent event)
        sensitivity_down();
      };
      
+     if(button == btnAmplify_down)// 
+     {
+       amplify_down();
+     };
+     
+    if(button == btnAmplify_up)// 
+     {
+       amplify_up();
+     };
+     
     if(button == btnLetsFire) //
       {
         //new_shooting_start_time = i_delay;
+        reset_to_config();
         b_start_shooting_prepare_countdown_synchronization = true;
       }
    
@@ -967,27 +978,17 @@ void keyPressed()
      
       if( key == 109 && b_Configure)  // key == m
       {    
-        //TODO: move this to method
-        f_brightness_amplifier += 0.05;
-        System.out.println("f_brightness_amplifier: " + f_brightness_amplifier);
+        amplify_up();
       }   
      
       if( key == 110 && b_Configure)  // key == n
       {    
-        //TODO: move this to method
-        f_brightness_amplifier -= 0.05;
-        if(f_brightness_amplifier < 0.2)
-        {
-          System.out.println("f_brightness_amplifier cannot go lower...");
-          f_brightness_amplifier = 0.2;
-        }
-        System.out.println("f_brightness_amplifier: " + f_brightness_amplifier);
+        amplify_down();
       } 
       
       if( key == 103 && b_Configure)  // key == g
       {    
-        f_brightness_amplifier = 1;
-        System.out.println("f_brightness_amplifier: " + f_brightness_amplifier);
+        amplify_reset();
       } 
    
      

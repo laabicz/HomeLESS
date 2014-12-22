@@ -4,5 +4,5 @@ String s_gunshot_path = "sounds/";
 
 void play_gunshot_sample()
 { 
-  shot_sample.trigger();
+  //shot_sample.trigger();
 }

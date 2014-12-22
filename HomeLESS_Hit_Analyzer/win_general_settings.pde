@@ -1,39 +1,39 @@
 /*
 This win_general_settings.pde is part of HomeLESS Hit Analyzer.
-
-HomeLESS Hit Analyzer is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or any later version.
-
-HomeLESS: Hit Analyzer is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with HomeLESS Hit Analyzer.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ 
+ HomeLESS Hit Analyzer is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 2 of the License, or any later version.
+ 
+ HomeLESS: Hit Analyzer is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License
+ along with HomeLESS Hit Analyzer.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 GWindow windowGeneral_settings;
 
-GLabel lblTime, lblShooter, lblAutoshootlog, lblSensitivity, lblSound;
+GLabel lblTime, lblShooter, lblAutoshootlog, lblSensitivity, lblAmplify, lblSound;
 GLabel lblTimelimit, lblHitslimit, lblCount_up, lblCount_down, lblRear_cam, lblCountdown_timer;
 GCheckbox cbxAutoshootlog, cbxLimitedbytime, cbxLimitedbyhits, cbxCountdown_timer, cbxRearcam, cbxSound;
 
 GTextField txtShooting_Time_Minutes, txtShooting_Time_Seconds, txtRounds;
-GImageButton btnSave_general;
-public String s_Hit_limits,  s_Time_limit, s_Countdown,  s_Autoshootlog, s_Rear_cam;
+GImageButton btnSave_general, btnAmplify_down, btnAmplify_up;
+public String s_Hit_limits, s_Time_limit, s_Countdown, s_Autoshootlog, s_Rear_cam;
 
 public void createWindowGeneral_settings()
 { 
-  
+
   windowGeneral_settings = new GWindow(this, "HA - General Settings", 800, 200, 380, 160, false, JAVA2D);
   //windowGeneral_settings = new GWindow(this, "HA - General Settings", 800, 200, 380, 160, false, P2D);  
   windowGeneral_settings.addDrawHandler(this, "windowGeneral_settings_draw");
   PApplet win_general = windowGeneral_settings.papplet;
-  
+
   windowGeneral_settings.setActionOnClose(GWindow.CLOSE_WINDOW);
-  
+
   //shooter name (shooter file dropdownlist at future... :) )
   x_position = 10;
   y_position = 10;
@@ -61,7 +61,7 @@ public void createWindowGeneral_settings()
   txtRounds = new GTextField(win_general, x_position, y_position, 25, 20);
   txtRounds.setText(String.valueOf(i_Rounds));
   txtRounds.addEventHandler(this, "handle_txtRounds");
-    
+
   //limited by time
   x_position = 10;
   y_position = 70;
@@ -78,10 +78,10 @@ public void createWindowGeneral_settings()
   txtShooting_Time_Minutes.setText(String.valueOf(i_time_of_shooting_minutes_total));
   txtShooting_Time_Minutes.addEventHandler(this, "handle_txtShooting_Time_Minutes");
   x_position += 50;
-  txtShooting_Time_Seconds = new GTextField(win_general, x_position , y_position, 25, 20);
+  txtShooting_Time_Seconds = new GTextField(win_general, x_position, y_position, 25, 20);
   txtShooting_Time_Seconds.setText(String.valueOf(i_time_of_shooting_seconds_total));
   txtShooting_Time_Seconds.addEventHandler(this, "handle_txtShooting_Time_Seconds");
-  
+
   //countdown timer enable
   x_position = 10;
   y_position = 95;
@@ -93,7 +93,7 @@ public void createWindowGeneral_settings()
   lblCountdown_timer.setTextAlign(GAlign.LEFT, GAlign.MIDDLE );
   lblCountdown_timer.setText(s_Countdown); 
   lblCountdown_timer.setOpaque(false);
-  
+
   //autoshootlog   
   x_position = 10;
   y_position = 120;
@@ -105,11 +105,11 @@ public void createWindowGeneral_settings()
   lblAutoshootlog.setText(s_Autoshootlog);
   lblAutoshootlog.setTextAlign(GAlign.LEFT, GAlign.MIDDLE );
   lblAutoshootlog.setOpaque(false);
-  
-   
-  
-  
-  
+
+
+
+
+
   // sensitivity settings
   x_position = 230;
   y_position = 10;
@@ -119,19 +119,46 @@ public void createWindowGeneral_settings()
   lblSensitivity.setOpaque(false);
   x_position += 80;
   y_position -= 2;
-  images = new String[]{ "graphics/sensitivity_down_1.png", "graphics/sensitivity_down_2.png", "graphics/sensitivity_down_3.png" };
+  images = new String[] { 
+    "graphics/sensitivity_down_1.png", "graphics/sensitivity_down_2.png", "graphics/sensitivity_down_3.png"
+  };
   btnSensitivity_down = new GImageButton(win_general, x_position, y_position, images);
   btnSensitivity_down.tag = "Sensitivity_down";  
   x_position += 30;
-  images = new String[]{ "graphics/sensitivity_up_1.png", "graphics/sensitivity_up_2.png", "graphics/sensitivity_up_3.png" };
+  images = new String[] { 
+    "graphics/sensitivity_up_1.png", "graphics/sensitivity_up_2.png", "graphics/sensitivity_up_3.png"
+  };
   btnSensitivity_up = new GImageButton(win_general, x_position, y_position, images);
   btnSensitivity_up.tag = "Sensitivity_up";
+  //y_position += 30;
+
+  // amplify settings
+  x_position = 230;
+  y_position += 35;
+  lblAmplify = new GLabel(win_general, x_position, y_position, 80, 20);
+  lblAmplify.setText(s_Amplify + s_colon_with_space);
+  lblAmplify.setTextAlign(GAlign.LEFT, GAlign.MIDDLE );
+  lblAmplify.setOpaque(false);
+  x_position += 80;
+  y_position -= 2;
+  images = new String[] { 
+    "graphics/minus_1.png", "graphics/minus_2.png", "graphics/minus_3.png"
+  };
+  btnAmplify_down = new GImageButton(win_general, x_position, y_position, images);
+  btnAmplify_down.tag = "Amplify_down";  
+  x_position += 30;
+  images = new String[] { 
+    "graphics/plus_1.png", "graphics/plus_2.png", "graphics/plus_3.png"
+  };
+  btnAmplify_up = new GImageButton(win_general, x_position, y_position, images);
+  btnAmplify_up.tag = "Amplify_up";
   y_position += 30;
-  
-  
+
+
+
   //rearcam settings
-  x_position = 225;
-  y_position = 45;
+  x_position = 230;
+  y_position = 75;
   cbxRearcam = new GCheckbox(win_general, x_position, y_position, 22, 18, "");
   cbxRearcam.setSelected(b_invert_hit_X);
   cbxRearcam.addEventHandler(this, "cbxRearcam_clicked");
@@ -140,26 +167,26 @@ public void createWindowGeneral_settings()
   lblRear_cam.setText(s_Rear_cam);
   lblRear_cam.setTextAlign(GAlign.LEFT, GAlign.MIDDLE );
   lblRear_cam.setOpaque(false);
-  
-  x_position = 225;
-  y_position += 25;
-  cbxSound = new GCheckbox(win_general, x_position, y_position, 22, 18, "");
-  cbxSound.setSelected(b_sound_enabled);
-  cbxSound.addEventHandler(this, "cbxSound_clicked");
-  x_position += 20;
-  lblSound = new GLabel(win_general, x_position, y_position, 120, 20);
-  lblSound.setText("Sound not var");
-  lblSound.setTextAlign(GAlign.LEFT, GAlign.MIDDLE );
-  lblSound.setOpaque(false);
 
+  /* Sound disabled
+   x_position = 225;
+   y_position += 25;
+   cbxSound = new GCheckbox(win_general, x_position, y_position, 22, 18, "");
+   cbxSound.setSelected(b_sound_enabled);
+   cbxSound.addEventHandler(this, "cbxSound_clicked");
+   x_position += 20;
+   lblSound = new GLabel(win_general, x_position, y_position, 120, 20);
+   lblSound.setText("Sound not var");
+   lblSound.setTextAlign(GAlign.LEFT, GAlign.MIDDLE );
+   lblSound.setOpaque(false);
+   */
   x_position = 290;
   y_position = 120;
-  images = new String[]{ "graphics/save_1.png", "graphics/save_2.png", "graphics/save_3.png" };
+  images = new String[] { 
+    "graphics/save_1.png", "graphics/save_2.png", "graphics/save_3.png"
+  };
   btnSave_general = new GImageButton(win_general, x_position, y_position, images);
-  btnSave_general.tag = "Save_general";  
-
-  
-  
+  btnSave_general.tag = "Save_general";
 }
 
 
@@ -169,104 +196,104 @@ synchronized public void windowGeneral_settings_draw(GWinApplet appc, GWinData d
   appc.background(backround_color);
   /*
   //for other drawing
-  appc.fill(0,0,160);
-  appc.noStroke();
-  appc.ellipse(appc.width/2, appc.height/2, appc.width/1.2, appc.height/1.2);
-  appc.fill(255);
-  appc.text("Secondary window", 20, 20);
-  */
+   appc.fill(0,0,160);
+   appc.noStroke();
+   appc.ellipse(appc.width/2, appc.height/2, appc.width/1.2, appc.height/1.2);
+   appc.fill(255);
+   appc.text("Secondary window", 20, 20);
+   */
 }
 
 
 void handle_txtShooting_Time_Seconds(GTextField textfield, GEvent event)  //Time
 {
-    switch(event)
-    {
-    case CHANGED: 
-      b_shortcuts = false;
-      break;
-    case ENTERED:
-      check_inserted_time_values_limits();
-      calculate_time_of_shooting_total();
-      convert_time();
-      //f_shooting_time = Float.parseFloat(txtShooting_Time_Seconds.getText());
-      //System.out.println("i_time_of_shooting_seconds_total: " + i_time_of_shooting_seconds_total);
-      break;
-    }
+  switch(event)
+  {
+  case CHANGED: 
+    b_shortcuts = false;
+    break;
+  case ENTERED:
+    check_inserted_time_values_limits();
+    calculate_time_of_shooting_total();
+    convert_time();
+    //f_shooting_time = Float.parseFloat(txtShooting_Time_Seconds.getText());
+    //System.out.println("i_time_of_shooting_seconds_total: " + i_time_of_shooting_seconds_total);
+    break;
+  }
 };
 
 
 void handle_txtShooting_Time_Minutes(GTextField textfield, GEvent event)  //Time
 {
-   //int i_shooting_time_minutes; 
-  
-    switch(event)
-    {
-    case CHANGED: 
-      b_shortcuts = false;
-      break;
-    case ENTERED:
-      check_inserted_time_values_limits();
-      calculate_time_of_shooting_total();
-      convert_time();
-      //f_shooting_time = Float.parseFloat(txtShooting_Time_Seconds.getText());
-      //f_shooting_time = f_shooting_time  + (i_time_of_shooting_minutes_total * 60);
-      break;
-    }
+  //int i_shooting_time_minutes; 
+
+  switch(event)
+  {
+  case CHANGED: 
+    b_shortcuts = false;
+    break;
+  case ENTERED:
+    check_inserted_time_values_limits();
+    calculate_time_of_shooting_total();
+    convert_time();
+    //f_shooting_time = Float.parseFloat(txtShooting_Time_Seconds.getText());
+    //f_shooting_time = f_shooting_time  + (i_time_of_shooting_minutes_total * 60);
+    break;
+  }
 };
 
 //Hit limit
 void handle_txtRounds(GTextField textfield, GEvent event)
 {
-    switch(event)
+  switch(event)
+  {
+  case CHANGED: 
+    b_shortcuts = false;
+    break;
+  case ENTERED:
+    i_Rounds = Integer.parseInt(txtRounds.getText());
+    if (i_Rounds > 99)
     {
-    case CHANGED: 
-      b_shortcuts = false;
-      break;
-    case ENTERED:
-      i_Rounds = Integer.parseInt(txtRounds.getText());
-      if(i_Rounds > 99)
-        {
-          i_Rounds = 99;
-          txtRounds.setText(String.valueOf(i_Rounds));
-          System.out.println("\nWARNING: Value of Rounds cannot be higher than 99.");
-        }
-      System.out.println("\nNew value of Rounds is set to : " + i_Rounds + " rounds." );
-      break;
+      i_Rounds = 99;
+      txtRounds.setText(String.valueOf(i_Rounds));
+      System.out.println("\nWARNING: Value of Rounds cannot be higher than 99.");
     }
+    System.out.println("\nNew value of Rounds is set to : " + i_Rounds + " rounds." );
+    break;
+  }
 };
 
 
 public void cbxRearcam_clicked(GCheckbox source, GEvent event)
 { 
   //println("cbxRearcam_clicked - GCheckbox event occured " + System.currentTimeMillis()%10000000 );
-  
 
-      if(b_invert_hit_X == true)
-        {
-          b_invert_hit_X = false;
-          System.out.println("\nRearcam disabled. X-axis of hit is NOT inverted.");
-        }
-      else  //if(b_invert_hit_X == false)
-        {
-          b_invert_hit_X = true;
-          System.out.println("\nRearcam enabled. X-axis of hit is inverted.");
-        };
+
+  if (b_invert_hit_X == true)
+  {
+    b_invert_hit_X = false;
+    System.out.println("\nRearcam disabled. X-axis of hit is NOT inverted.");
+  }
+  else  //if(b_invert_hit_X == false)
+  {
+    b_invert_hit_X = true;
+    System.out.println("\nRearcam enabled. X-axis of hit is inverted.");
+  };
 };
 
 public void cbxLimitedbyhits_clicked(GCheckbox source, GEvent event)
 { 
   //println("cbxLimitedbyhits_clicked - GCheckbox event occured " + System.currentTimeMillis()%10000000 );
-  if(b_hit_limit == false)
-    {
-      b_hit_limit = true;
-      System.out.println("\nHit limit enabled.");
-    }
+  if (b_hit_limit == false)
+  {
+    b_hit_limit = true;
+    System.out.println("\nHit limit enabled.");
+  }
   else  //if(b_invert_hit_X == false)
-    {
-      b_hit_limit = false;
-      System.out.println("\nHit limit disabled.");
-    };
+  {
+    b_hit_limit = false;
+    System.out.println("\nHit limit disabled.");
+  };
 };
 
 
@@ -275,37 +302,36 @@ public void cbxLimitedbyhits_clicked(GCheckbox source, GEvent event)
 public void cbxLimitedbytime_clicked(GCheckbox source, GEvent event)
 { 
   //System.out.println("cbxLimitedbytime_clicked - GCheckbox event occured " + System.currentTimeMillis()%10000000 );
-  if(b_time_limit == false)
-    {
-      b_time_limit = true;
-      System.out.println("\nTime limit enabled.");
-    }
+  if (b_time_limit == false)
+  {
+    b_time_limit = true;
+    System.out.println("\nTime limit enabled.");
+  }
   else  //if(b_invert_hit_X == false)
-    {
-      b_time_limit = false;
-      System.out.println("\nTime limit disabled.");
-    };
-  
+  {
+    b_time_limit = false;
+    System.out.println("\nTime limit disabled.");
+  };
+
   check_inserted_time_values_limits();
   calculate_time_of_shooting_total();
   convert_time();
-  
 };
-  
+
 public void cbxCountdown_timer_clicked(GCheckbox source, GEvent event)
 { 
   //System.out.println("cbxCountdown_timer_clicked - GCheckbox event occured " + System.currentTimeMillis()%10000000 );
-  if(b_show_time_as_countdown == false)
-    {
-      b_show_time_as_countdown = true;
-      System.out.println("\nCountdown enabled.");
-    }
+  if (b_show_time_as_countdown == false)
+  {
+    b_show_time_as_countdown = true;
+    System.out.println("\nCountdown enabled.");
+  }
   else  //if(b_invert_hit_X == false)
-    {
-      b_show_time_as_countdown = false;
-      System.out.println("\nCountdown disabled.");
-    };
-    convert_time();
+  {
+    b_show_time_as_countdown = false;
+    System.out.println("\nCountdown disabled.");
+  };
+  convert_time();
 };
 
 
@@ -315,17 +341,17 @@ public void cbxCountdown_timer_clicked(GCheckbox source, GEvent event)
 public void cbxAutoshootlog_clicked(GCheckbox source, GEvent event)
 { 
   //System.out.println("Autoshotlog clicked \n");
-  
-  if(b_autoshootlog == false)
-    {
-      b_autoshootlog = true;
-      System.out.println("\nAutoshootlog enabled.");
-    }
+
+  if (b_autoshootlog == false)
+  {
+    b_autoshootlog = true;
+    System.out.println("\nAutoshootlog enabled.");
+  }
   else  //if(b_invert_hit_X == false)
-    {
-      b_autoshootlog = false;
-      System.out.println("\nAutoshootlog disabled.");
-    };
+  {
+    b_autoshootlog = false;
+    System.out.println("\nAutoshootlog disabled.");
+  };
   //b_autoshootlog = true;
   //b_autoshootlog = false;
 };
@@ -335,17 +361,17 @@ public void cbxAutoshootlog_clicked(GCheckbox source, GEvent event)
 public void cbxSound_clicked(GCheckbox source, GEvent event)
 { 
   //System.out.println("Autoshotlog clicked \n");
-  
-  if(b_sound_enabled == false)
-    {
-      b_sound_enabled = true;
-      System.out.println("\nSound enabled.");
-    }
+
+  if (b_sound_enabled == false)
+  {
+    b_sound_enabled = true;
+    System.out.println("\nSound enabled.");
+  }
   else  //if(b_invert_hit_X == false)
-    {
-      b_sound_enabled = false;
-      System.out.println("\nSound disabled.");
-    };
+  {
+    b_sound_enabled = false;
+    System.out.println("\nSound disabled.");
+  };
   //b_autoshootlog = true;
   //b_autoshootlog = false;
 };
@@ -354,35 +380,64 @@ void check_inserted_time_values_limits()
 {
   i_time_of_shooting_seconds_total =  Integer.parseInt(txtShooting_Time_Seconds.getText());
   i_time_of_shooting_minutes_total = Integer.parseInt(txtShooting_Time_Minutes.getText());
-  
-  if(i_time_of_shooting_minutes_total > 999)
-     {
-       i_time_of_shooting_minutes_total = 999;
-       System.out.println("\nWARNING: Value of Minutes cannot be higher than 999.");
-     };
 
-  if(i_time_of_shooting_seconds_total > 59)
-     {
-       i_time_of_shooting_seconds_total = 59;
-       System.out.println("\nWARNING: Value of Seconds cannot be higher than 59.");
-     };
-  
+  if (i_time_of_shooting_minutes_total > 999)
+  {
+    i_time_of_shooting_minutes_total = 999;
+    System.out.println("\nWARNING: Value of Minutes cannot be higher than 999.");
+  };
+
+  if (i_time_of_shooting_seconds_total > 59)
+  {
+    i_time_of_shooting_seconds_total = 59;
+    System.out.println("\nWARNING: Value of Seconds cannot be higher than 59.");
+  };
+
   txtShooting_Time_Seconds.setText(String.valueOf(i_time_of_shooting_seconds_total));
   txtShooting_Time_Minutes.setText(String.valueOf(i_time_of_shooting_minutes_total));
 };
 
 void calculate_time_of_shooting_total()
 {
-   i_time_of_shooting_total = i_time_of_shooting_minutes_total * 60;
-   i_time_of_shooting_total += i_time_of_shooting_seconds_total;
-   i_time_of_shooting_countdown = i_time_of_shooting_total;
-   
-   //temporary
-   //f_shooting_time = (float)i_time_of_shooting_total;
-   i_time_of_shooting_actual = i_time_of_shooting_total;
-   //System.out.println("Shooting_time Minutes: " + i_time_of_shooting_minutes_total);
-   //System.out.println("Shooting_time seconds : " + i_time_of_shooting_seconds_total);
-   //System.out.println("Shooting_time total : " + i_time_of_shooting_total);
-   //System.out.println("Shooting_time total old: " + f_shooting_time);
+  i_time_of_shooting_total = i_time_of_shooting_minutes_total * 60;
+  i_time_of_shooting_total += i_time_of_shooting_seconds_total;
+  i_time_of_shooting_countdown = i_time_of_shooting_total;
+
+  //temporary
+  //f_shooting_time = (float)i_time_of_shooting_total;
+  i_time_of_shooting_actual = i_time_of_shooting_total;
+  //System.out.println("Shooting_time Minutes: " + i_time_of_shooting_minutes_total);
+  //System.out.println("Shooting_time seconds : " + i_time_of_shooting_seconds_total);
+  //System.out.println("Shooting_time total : " + i_time_of_shooting_total);
+  //System.out.println("Shooting_time total old: " + f_shooting_time);
+}
+
+
+void amplify_down()
+{
+  f_brightness_amplifier -= 0.05;
+  if (f_brightness_amplifier < 0.2)
+  {
+    System.out.println("Brightness amplifier cannot go lower...");
+    f_brightness_amplifier = 0.2;
+  }
+  System.out.println("Brightness amplifier: " + f_brightness_amplifier);
+}
+
+void amplify_up()
+{
+  f_brightness_amplifier += 0.05;
+  if (f_brightness_amplifier > 3)
+  {
+    System.out.println("Brightness amplifier cannot go higher...");
+    f_brightness_amplifier = 3;
+  }
+  System.out.println("Brightness amplifier: " + f_brightness_amplifier);
+}
+
+void amplify_reset()
+{
+  f_brightness_amplifier = 1;
+  System.out.println("Brightness amplifier: " + f_brightness_amplifier);
 }
 

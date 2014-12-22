@@ -258,17 +258,24 @@ public void load_weapon_file()
   f_hit_sight_offset_X = Float.valueOf(contain[4]).floatValue() - 5000;
   f_hit_sight_offset_Y = Float.valueOf(contain[5]).floatValue() - 5000;
   
-  //TODO: Try to get sound file (optional). 
+  //Try to get sound file (optional). 
   if(contain.length > 6) //on 7th line is name of sound file, first line is 1
   {
     System.out.println("Sound file: " + contain[6]);
-    //shot_sample = minim.loadSample("...
+    s_gunshot_filename = contain[6];
   }
-  //else load default sound file
-  s_gunshot_filename = "default_gunshot.mp3";
+  else //load default sound file
+  {
+    //s_gunshot_path = "sounds/"; can be in another directory
+    System.out.println("Sound file: default_gunshot.mp3");
+    s_gunshot_filename = "default_gunshot.mp3";
+  }
+  /*
   s_gunshot_path = "sounds/";
-  shot_sample = minim.loadSample("sounds/default_gunshot.mp3", 512); // filename , buffer size
-  
+  System.out.println(s_gunshot_path + s_gunshot_filename);
+  minim = new Minim(this);
+  shot_sample = minim.loadSample(s_gunshot_path + s_gunshot_filename, 512); // filename , buffer size
+  */
   println("\nWeapon file loaded");
   println(" -Weapon name: " + s_weapon_name);
   println(" -Weapon caliber: " + s_projectile_diameter + s_Caliber_units );

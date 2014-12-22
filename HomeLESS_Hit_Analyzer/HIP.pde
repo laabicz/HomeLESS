@@ -93,7 +93,7 @@ void HIP_setup()
 
 void send_hit_position()
 {
-   if(b_hip_enable && b_Hit_detected ) // normal style
+   if(b_hip_enable) // normal style
      {
         // formats the message for Pd
         //hit, unremaped: //TODO: replace HA by HIP 
