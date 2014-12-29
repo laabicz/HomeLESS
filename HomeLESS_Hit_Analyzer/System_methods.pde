@@ -165,37 +165,37 @@ void camera_setup()
   println("\nStarting video...\n");
   if(webcam_type == 0)
   {
-    //video = new GSCapture(this, video_width, video_height, "/dev/video0");
-    video = new Capture(this, video_width, video_height, "/dev/video0");
+    video = new GSCapture(this, video_width, video_height, "/dev/video0");
+    //video = new Capture(this, video_width, video_height, "/dev/video0");
   }
   else if(webcam_type == 1)
   {
-    //video = new GSCapture(this, video_width, video_height, "/dev/video1");
-    video = new Capture(this, video_width, video_height, "/dev/video1");
+    video = new GSCapture(this, video_width, video_height, "/dev/video1");
+    //video = new Capture(this, video_width, video_height, "/dev/video1");
   }
   else if(webcam_type == 2)
   {
-    //video = new GSCapture(this, video_width, video_height, "/dev/video2");
-    video = new Capture(this, video_width, video_height, "/dev/video2");
+    video = new GSCapture(this, video_width, video_height, "/dev/video2");
+    //video = new Capture(this, video_width, video_height, "/dev/video2");
   }
   else if(webcam_type == 3)
   {
-    //video = new GSCapture(this, video_width, video_height, "/dev/video3");
-    video = new Capture(this, video_width, video_height, "/dev/video3");
+    video = new GSCapture(this, video_width, video_height, "/dev/video3");
+    //video = new Capture(this, video_width, video_height, "/dev/video3");
   }
   else if(webcam_type == 4)
   {
-    //video = new GSCapture(this, video_width, video_height, "/dev/video4");
-    video = new Capture(this, video_width, video_height, "/dev/video4");
+    video = new GSCapture(this, video_width, video_height, "/dev/video4");
+    //video = new Capture(this, video_width, video_height, "/dev/video4");
   }
   else if(webcam_type == 5)
   {
-    //video = new GSCapture(this, video_width, video_height, "/dev/video5");
-    video = new Capture(this, video_width, video_height, "/dev/video5");
+    video = new GSCapture(this, video_width, video_height, "/dev/video5");
+    //video = new Capture(this, video_width, video_height, "/dev/video5");
   }
   else
-  //video = new GSCapture(this, video_width, video_height);
-  video = new Capture(this, video_width, video_height);
+  video = new GSCapture(this, video_width, video_height);
+  //video = new Capture(this, video_width, video_height);
 }
 
 

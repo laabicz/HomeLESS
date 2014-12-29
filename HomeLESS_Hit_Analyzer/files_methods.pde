@@ -684,14 +684,14 @@ public void save_file_ha_ini()
 
 public void save_file_default_ha_ini()
 {
-  String[] s_default_ha_ini = {"** Webcam settings **", "Webcam = 6", "Rear cam = 0", "Video width = 640", "Video height = 480", "Sensitivity = 1", "Amplify = 100", "", "** General settings **", "Shooter = Mamlas", "Weapon = default_weapon.gun", "Language = english", "Autoshootlog = 1", "Sound = 1","", "** Shooting settings **", "Rounds = 10", "Time = 30", "Time limit = 1","Countdown = 1" ,"Hit limit = 1", "SLH = 1", "Prepare = 3", "", "** Target settings **", "Target = air_rifle_cz.tgt", "Scale = 1", "X correction = 5000", "Y correction = 5000", "Simulated distance = 10", "Real distance = 5", "Metric distance = 1"};
+  String[] s_default_ha_ini = {"** Webcam settings **", "Webcam = 0", "Rear cam = 0", "Video width = 640", "Video height = 480", "Sensitivity = 1", "Amplify = 100", "", "** General settings **", "Shooter = Mamlas", "Weapon = default_weapon.gun", "Language = english", "Autoshootlog = 1", "Sound = 0","", "** Shooting settings **", "Rounds = 10", "Time = 30", "Time limit = 1","Countdown = 1" ,"Hit limit = 1", "SLH = 1", "Prepare = 3", "", "** Target settings **", "Target = air_rifle_cz.tgt", "Scale = 1", "X correction = 5000", "Y correction = 5000", "Simulated distance = 10", "Real distance = 5", "Metric distance = 1"};
   saveStrings("ha.ini", s_default_ha_ini);
   System.out.println("\nFile \"ha.ini\" has been created with default settings.");
 }
 
 public void save_file_default_english_lng()
 {
-  String[] s_default_english_lng = {"HomeLESS - Hit Analyzer version 1.2a", "Target", "Time", "Points", "Hits", "Total", "Shooter", "Weapon", "Caliber", "Distance", "Rounds", "meters", "yards", "hits", "** General settings **", "Hits limit", "Time limit", "Countdown", "Autoshootlog", "Sensitivity", "Rear cam", "Show last hit", "** Target setttings **", "Target selection", "Correction", "Simulated distance", "Real distance", "Use metric system", "** Weapon settings **", "Profile", "Name", "Sight adjustment", "** Shootlog **", "Date", "Hour", "Average", "Target name", "Shootlog version: 2", "Target file", "Target type"};
+  String[] s_default_english_lng = {"HomeLESS - Hit Analyzer version 1.2b", "Target", "Time", "Points", "Hits", "Total", "Shooter", "Weapon", "Caliber", "Distance", "Rounds", "meters", "yards", "hits", "** General settings **", "Hits limit", "Time limit", "Countdown", "Autoshootlog", "Sensitivity", "Amplify", "Rear cam", "Show last hit", "** Target setttings **", "Target selection", "Correction", "Simulated distance", "Real distance", "Use metric system", "** Weapon settings **", "Profile", "Name", "Sight adjustment", "** Shootlog **", "Date", "Hour", "Average", "Target name", "Shootlog version: 2", "Target file", "Target type"};
   saveStrings("languages/english.lng", s_default_english_lng);
   System.out.println("\nDefault file \"./languages/english.lng\" has been created!");
 }

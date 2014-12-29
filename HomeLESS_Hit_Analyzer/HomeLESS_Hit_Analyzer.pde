@@ -27,8 +27,8 @@ along with HomeLESS Hit Analyzer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 
-//import codeanticode.gsvideo.*;  //replace this in ver. 1.3, -replaced in 1.2b :-)
-import processing.video.*;
+import codeanticode.gsvideo.*;  //replace this in ver. 1.3, -replaced in 1.2b :-)
+//import processing.video.*;  // new version
 import processing.opengl.*;
 import hypermedia.net.*;    // import UDP library
 import g4p_controls.*;
@@ -39,8 +39,8 @@ Minim minim;
 AudioSample shot_sample;
 */
 
-//GSCapture video;  //old
-Capture video;
+GSCapture video;  //old
+//Capture video; //new, but not working under WinXp
 
 //GCheckbox cbxShow_last_hit, cbxDiameter;
 

@@ -261,14 +261,14 @@ public void load_weapon_file()
   //Try to get sound file (optional). 
   if(contain.length > 6) //on 7th line is name of sound file, first line is 1
   {
-    System.out.println("Sound file: " + contain[6]);
+    //System.out.println("Sound file: " + contain[6]);
     s_gunshot_filename = contain[6];
   }
   else //load default sound file
   {
     //s_gunshot_path = "sounds/"; can be in another directory
-    System.out.println("Sound file: default_gunshot.mp3");
-    s_gunshot_filename = "default_gunshot.mp3";
+    //System.out.println("Sound file: default_gunshot.mp3");
+    //s_gunshot_filename = "default_gunshot.mp3";
   }
   /*
   s_gunshot_path = "sounds/";
